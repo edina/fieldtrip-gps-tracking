@@ -31,7 +31,90 @@ DAMAGE.
 
 "use strict";
 
-define(['ui', 'map', './tracks'], function(ui, map, tracks){
+define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, settings, tracks){
+    var currentGpsAnnotation;
+
+    /**
+     * GPS capture form page.
+     */
+    var annotateGpsPage = function(){
+        var colour = "red";
+        var defcolour = localStorage.getItem(tracks.COLOUR_INDEX);
+        if(defcolour){
+            colour = defcolour;
+        }
+        else{
+            localStorage.setItem(tracks.COLOUR_INDEX, 'red');
+        }
+
+        // we need to add colour picker input dynamically otherwise
+        // JQM will attempt to format the input element
+        $('#annotate-gps-colour-pick').append('<input id="annotate-gps-colour-pick-input" type="color" name="color" />');
+
+        utils.appendDateTimeToInput("#annotate-gps-form-title");
+
+        $("#annotate-gps-colour-pick-input").spectrum({
+            showPalette: true,
+            showPaletteOnly: true,
+            color: colour,
+            change: function(color){
+                localStorage.setItem(tracks.COLOUR_INDEX, color.toString());
+            },
+            palette: [
+                ['red', 'orange', 'yellow', 'green'],
+                ['blue', 'pink', 'white', 'black']
+            ]
+        });
+
+        // listen on start button
+        $('#annotate-gps-form-ok').click($.proxy(function(event){
+            $('#annotate-gps-form').submit();
+        }, this));
+
+        // form submitted
+        $('#annotate-gps-form').submit($.proxy(function(event){
+            if($('#annotate-gps-form-title').val().length === 0){
+                $('#annotate-gps-form-title').addClass('ui-focus');
+                utils.inform('Required field not populated');
+            }
+            else{
+                currentGpsAnnotation = {
+                    'record':{
+                        'editor': 'track.edtr',
+                        'name': $('#annotate-gps-form-title').val(),
+                        'fields': [
+                            {
+                                'id': 'fieldcontain-textarea-1',
+                                'val': $('#annotate-gps-form-description').val(),
+                                'label': 'Description',
+                            },
+                            {
+                                // track currently must be second element,
+                                // see showGPSTrack
+                                'id': 'fieldcontain-track-1',
+                                'val': '',
+                                'label': 'Track',
+                                'style': {
+                                    strokeColor: localStorage.getItem(tracks.COLOUR_INDEX),
+                                    strokeWidth: 5,
+                                    strokeOpacity: 1
+                                }
+                            }
+                        ],
+                    },
+                    'isSynced': false,
+                    'rate': $('#annotate-gps-form-rate').val()
+                };
+
+                // TODO
+                //plugins.SoftKeyBoard.hide();
+                $.mobile.changePage('gps-capture.html');
+            }
+
+            return false;
+        }, this));
+
+    };
 
     /**
      * Initialise GPS capture page.
@@ -51,29 +134,30 @@ define(['ui', 'map', './tracks'], function(ui, map, tracks){
         }
 
         // save GPS route
-        $('#gpscapture-confirm-save').click($.proxy(function(e){
-            this.annotations.gpsCaptureComplete();
+        $('#gpscapture-confirm-save').click(function(e){
+            tracks.gpsCaptureComplete();
             $.mobile.changePage('map.html');
-        }, this));
+        });
 
         // cancel GPS route save
         $('#gpscapture-confirm-cancel').click($.proxy(function(){
-            this.annotations.gpsTrack();
+            tracks.gpsTrack();
         }, this));
 
         // pause/resume GPS track button
         $('#gpscapture-pause-play').click($.proxy(function(){
             if($("#gpscapture-pause-play").text().trim() === 'Pause'){
-                this.annotations.gpsTrackPause();
+                tracks.gpsTrackPause();
                 changeToResume();
             }
             else{
-                this.annotations.gpsTrackPlay(
-                    this.currentGpsAnnotation.rate,
-                    this.settings.debugGPS());
+                tracks.gpsTrackPlay(
+                    currentGpsAnnotation.rate,
+                    settings.debugGPS());
                 $("#gpscapture-pause-play .ui-btn-text").text('Pause');
-                $("#gpscapture-pause-play .ui-icon").css('background-image',
-                                                         'url("css/images/pause.png")');
+                $("#gpscapture-pause-play .ui-icon").css(
+                    'background-image',
+                    'url("plugins/gps-tracking/css/images/pause.png")');
             }
 
             $('#gpscapture-pause-play').removeClass('ui-btn-active');
@@ -81,29 +165,43 @@ define(['ui', 'map', './tracks'], function(ui, map, tracks){
 
         // toogle track visibility
         $('#gpscapture-toggle-route').click($.proxy(function(){
-            this.map.gpsTrackToggle();
+            tracks.gpsTrackToggle();
             $('#gpscapture-toggle-route').removeClass('ui-btn-active');
         }, this));
 
         // discard track
         $('#gpscapture-confirm-discard').click($.proxy(function(){
-
-            this.annotations.gpsCaptureDiscard();
-
+            tracks.gpsCaptureDiscard();
             $('#gpscapture-toggle-route').removeClass('ui-btn-active');
             $.mobile.changePage('map.html');
         }, this));
 
         // kick off capture
-        this.annotations.gpsTrack(this.currentGpsAnnotation, this.settings.debugGPS());
+        tracks.gpsTrack(currentGpsAnnotation, settings.debugGPS());
 
-        this.map.hideAnnotateLayer();
-
-        this.map.updateSize();
+        map.hideAnnotateLayer();
+        //map.updateSize();
     };
 
+    // load spectrum js and css files for colour picker
+    $.getScript('js/ext/spectrum.js');
+    $('head').prepend('<link rel="stylesheet" href="css/ext/spectrum.css" type="text/css" />');
 
+    // load gpx styles
+    $('head').prepend('<link rel="stylesheet" href="plugins/gps-tracking/css/style.css" type="text/css" />');
+
+    // initial annotate page form
+    $(document).on('pageinit',
+                   '#annotate-gps-page',
+                   annotateGpsPage);
+
+    // the page that the track runs on
     $(document).on('pageshow',
                    '#gpscapture-page',
                    gpsCapturePage);
+    $(document).on('pageshow',
+                   '#gpscapture-page',
+                   function(){
+                       map.updateSize();
+                   });
 });

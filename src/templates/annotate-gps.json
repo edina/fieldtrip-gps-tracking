@@ -1,0 +1,14 @@
+{
+    "body": {
+        "title": "Title",
+        "description": "Description",
+        "start": "Start",
+        "rate-text": "Capture Rate",
+        "rate-5": "5 seconds",
+        "rate-10": "10 seconds",
+        "rate-20": "20 seconds",
+        "rate-30": "30 seconds",
+        "rate-60": "1 minute",
+        "colour": "Track Colour"
+    }
+}
