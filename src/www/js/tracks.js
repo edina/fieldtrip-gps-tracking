@@ -41,6 +41,7 @@ define(['map', 'records', 'utils'], function(map, records, utils){
     var gpsReceiveCount = 0;
     var gpsTrackWatchID;
 
+    // add new layer for real-time tracks
     var gpsTrackLayer = map.addLayer({
         id: 'gpsTrack',
         style:{
@@ -50,11 +51,13 @@ define(['map', 'records', 'utils'], function(map, records, utils){
         visible: false
     });
 
+    // create new style for tracks
     map.addRecordStyle({
         type: 'track',
         image: 'css/images/routemarker.png'
     });
 
+    // listen for clicks on tracks
     map.addRecordClickListener(function(feature){
         var isTrack = false;
         console.log("jings");
@@ -261,8 +264,6 @@ define(['map', 'records', 'utils'], function(map, records, utils){
                 }
                 onSuccess(position);
             }, 1000);
-
-            console.debug(gpsTrackWatchID);
         }
         else{
             gpsTrackWatchID = navigator.geolocation.watchPosition(
@@ -304,20 +305,6 @@ define(['map', 'records', 'utils'], function(map, records, utils){
         }
 
         // create layer with the GPX track
-        // layer = new OpenLayers.Layer.Vector(name, {
-        //     strategies: [new OpenLayers.Strategy.Fixed()],
-        //     protocol: new OpenLayers.Protocol.HTTP({
-        //         url: trackField.val,
-        //         format: new OpenLayers.Format.GPX()
-        //     }),
-        //     style: {
-        //         strokeColor: colour,
-        //         strokeWidth: 5,
-        //         strokeOpacity: 1
-        //     },
-        //     projection: map.EXTERNAL_PROJECTION
-        // });
-
         var layer = map.addGPXLayer({
             id: name,
             style:{
@@ -326,7 +313,6 @@ define(['map', 'records', 'utils'], function(map, records, utils){
             url: trackField.val
         });
 
-        //this.map.addLayer(layer);
         layer.setVisibility(true);
 
         layer.events.register("loadend", this, function() {
@@ -350,8 +336,12 @@ var _this = {
             var fileName  = (now + '.gpx').replace(/\s|:/g, '_');
             var fullName;
 
-            if(this.assetsDir){
-                fullName = this.assetsDir.fullPath + '/' + fileName;
+            var assetsDir = records.getAssetsDir();
+            if(assetsDir){
+                // TODO problem with cordova 3, it doesn't return the file:///
+                // prototcol in the fullPath property of files and directories.
+                // Below will not work for IOS or people with no sdcard!
+                fullName = 'file:///sdcard' + assetsDir.fullPath + '/' + fileName;
             }
 
             // initialise record point with user's current location
