@@ -36,6 +36,7 @@
     text-align: center;
     width: 50%;
 }
+
 #annotate-gps-form .ui-block-c{
     text-align: center;
     width: 25%;
@@ -47,7 +48,7 @@
     width: 3.2em;
 }
 
-.sp-palette .sp-thumb-el{
+.sp-container .sp-palette .sp-thumb-el{
     height: 3em;
     width: 3em;
 }
