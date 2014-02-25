@@ -196,7 +196,7 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
                    annotateGpsPage);
 
     // the page that the track runs on
-    $(document).on('pageshow',
+    $(document).on('pageinit',
                    '#gpscapture-page',
                    gpsCapturePage);
     $(document).on('pageshow',
