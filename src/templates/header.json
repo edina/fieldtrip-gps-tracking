@@ -1,0 +1,13 @@
+{
+    "header": {
+        "buttons" : {
+            "map-search":{
+                "class": "map-search",
+                "data-role": "button",
+                "data-inline": "true",
+                "data-transition": "none",
+                "data-iconpos": "notext"
+            }
+        }
+    }
+}

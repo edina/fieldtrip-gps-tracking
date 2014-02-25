@@ -1,0 +1,12 @@
+{
+    "popups": {
+        "popup1":{
+            "template": "map-search-popup.html",
+            "data": {
+                "question": "Are you sure you want to exit Fieldtrip Open?",
+                "cancel": "Cancel",
+                "exit": "Exit"
+            }
+        }
+    }
+}
