@@ -1,4 +1,4 @@
-.gpstrack-running{
+.ui-header-buttons .gpstrack-running{
     background-image: url("images/gpsrunning.png");
     background-position: 2px 0;
     background-color: red !important;

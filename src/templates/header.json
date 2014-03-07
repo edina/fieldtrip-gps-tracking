@@ -1,13 +1,12 @@
 {
-    "header": {
-        "buttons" : {
-            "map-search":{
-                "class": "map-search",
-                "data-role": "button",
-                "data-inline": "true",
-                "data-transition": "none",
-                "data-iconpos": "notext"
-            }
+    "buttons" : {
+        "gps-running":{
+            "class": "gpstrack-running",
+            "data-role": "button",
+            "data-inline": "true",
+            "data-transition": "none",
+            "data-iconpos": "notext",
+            "style": "display: none"
         }
     }
 }

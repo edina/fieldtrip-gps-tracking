@@ -106,8 +106,7 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
                     'rate': $('#annotate-gps-form-rate').val()
                 };
 
-                // TODO
-                //plugins.SoftKeyBoard.hide();
+                utils.hideKeyboard();
                 $.mobile.changePage('gps-capture.html');
             }
 
@@ -121,7 +120,6 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
      */
     var gpsCapturePage = function(){
         ui.mapPage('gpscapture-map');
-        //this.commonMapPageInit();
 
         var changeToResume = function(){
             $("#gpscapture-pause-play .ui-btn-text").text('Resume');
@@ -180,7 +178,6 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
         tracks.gpsTrack(currentGpsAnnotation, settings.debugGPS());
 
         map.hideAnnotateLayer();
-        //map.updateSize();
     };
 
     // load spectrum js and css files for colour picker
@@ -191,17 +188,47 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
     $('head').prepend('<link rel="stylesheet" href="plugins/gps-tracking/css/style.css" type="text/css" />');
 
     // initial annotate page form
-    $(document).on('pageinit',
-                   '#annotate-gps-page',
-                   annotateGpsPage);
+    $(document).on('pageinit', '#annotate-gps-page', annotateGpsPage);
 
     // the page that the track runs on
-    $(document).on('pageinit',
-                   '#gpscapture-page',
-                   gpsCapturePage);
-    $(document).on('pageshow',
-                   '#gpscapture-page',
-                   function(){
-                       map.updateSize();
-                   });
+    $(document).on('pageinit', '#gpscapture-page', gpsCapturePage);
+    $(document).on(
+        'pageshow',
+        '#gpscapture-page',
+        function(){
+            map.updateSize();
+        }
+    );
+
+    // show / hide gps track running icon
+    $(document).on(
+        'pagebeforeshow',
+        'div[data-role="page"]',
+        function(event){
+            console.log("=> " + tracks.gpsTrackStarted());
+            if(tracks.gpsTrackStarted()){
+                $('.gpstrack-running').show();
+            }
+            else{
+                $('.gpstrack-running').hide();
+            }
+        }
+    );
+
+    // click on gps capture running icon
+    $(document).on(
+        'vmousedown',
+        '.gpstrack-running',
+        function(event){
+            // timout hack prevents the clicking on the button on the
+            // same position on the next page
+            setTimeout(function(){
+                $.mobile.changePage('gps-capture.html');
+                event.stopPropagation();
+            }, 400);
+
+            return false;
+        }
+    );
+
 });
