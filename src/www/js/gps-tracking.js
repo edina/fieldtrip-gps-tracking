@@ -116,6 +116,13 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
     };
 
     /**
+     * Should GPS tracking be run in debug mode?
+     */
+    var debugGPS = function(){
+        return settings.get('debug-gps') === 'on';
+    };
+
+    /**
      * Initialise GPS capture page.
      */
     var gpsCapturePage = function(){
@@ -149,9 +156,7 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
                 changeToResume();
             }
             else{
-                tracks.gpsTrackPlay(
-                    currentGpsAnnotation.rate,
-                    settings.debugGPS());
+                tracks.gpsTrackPlay(currentGpsAnnotation.rate, debugGPS());
                 $("#gpscapture-pause-play .ui-btn-text").text('Pause');
                 $("#gpscapture-pause-play .ui-icon").css(
                     'background-image',
@@ -175,7 +180,7 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
         }, this));
 
         // kick off capture
-        tracks.gpsTrack(currentGpsAnnotation, settings.debugGPS());
+        tracks.gpsTrack(currentGpsAnnotation, debugGPS());
 
         map.hideAnnotateLayer();
     };
@@ -205,7 +210,6 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
         'pagebeforeshow',
         'div[data-role="page"]',
         function(event){
-            console.log("=> " + tracks.gpsTrackStarted());
             if(tracks.gpsTrackStarted()){
                 $('.gpstrack-running').show();
             }
