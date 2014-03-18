@@ -60,7 +60,6 @@ define(['map', 'records', 'utils'], function(map, records, utils){
     // listen for clicks on tracks
     map.addRecordClickListener(function(feature){
         var isTrack = false;
-        console.log("jings");
         if(feature.attributes.type === 'track'){
             isTrack = true;
             showGPSTrack(feature.attributes.id,
