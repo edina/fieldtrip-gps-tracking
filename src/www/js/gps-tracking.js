@@ -141,7 +141,7 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
         // save GPS route
         $('#gpscapture-confirm-save').click(function(e){
             tracks.gpsCaptureComplete();
-            utils.gotoMapPage();
+            $.mobile.changePage("index.html");
         });
 
         // cancel GPS route save
@@ -176,7 +176,7 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
         $('#gpscapture-confirm-discard').click($.proxy(function(){
             tracks.gpsCaptureDiscard();
             $('#gpscapture-toggle-route').removeClass('ui-btn-active');
-            $.mobile.changePage('map.html');
+            $.mobile.changePage('index.html');
         }, this));
 
         // kick off capture
