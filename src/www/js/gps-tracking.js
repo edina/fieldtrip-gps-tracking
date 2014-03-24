@@ -141,7 +141,7 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
         // save GPS route
         $('#gpscapture-confirm-save').click(function(e){
             tracks.gpsCaptureComplete();
-            $.mobile.changePage("index.html");
+            utils.gotoHomePage();
         });
 
         // cancel GPS route save
