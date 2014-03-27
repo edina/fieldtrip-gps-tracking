@@ -186,10 +186,10 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
        
         if(utils.showRecordsOnGpsTrackingPage()){
             map.showRecordsLayer();
-        } else {
-       
-            map.hideAnnotateLayer();
         }
+       
+        map.hideAnnotateLayer();
+       
     };
 
     // load spectrum js and css files for colour picker
