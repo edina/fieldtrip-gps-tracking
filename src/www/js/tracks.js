@@ -31,7 +31,7 @@ DAMAGE.
 
 "use strict";
 
-define(['map', 'records', 'utils'], function(map, records, utils){
+define(['map', 'records', 'utils','config'], function(map, records, utils, config){
     var GPS_ACCURACY = 50;
     var GPS_AUTO_SAVE_THRESHOLD = 5;
     var GPS_ACCURACY_FLAG = false;
@@ -42,7 +42,7 @@ define(['map', 'records', 'utils'], function(map, records, utils){
     var gpsTrackWatchID;
 
     // add new layer for real-time tracks
-    var gpsTrackLayer = map.addLayer({
+    var gpsTrackLayer = map.addLayer({ 
         id: 'gpsTrack',
         style:{
             colour: 'red',
@@ -336,11 +336,16 @@ var _this = {
             var fullName;
 
             var assetsDir = records.getAssetsDir();
+       
             if(assetsDir){
                 // TODO problem with cordova 3, it doesn't return the file:///
                 // prototcol in the fullPath property of files and directories.
                 // Below will not work for IOS or people with no sdcard!
-                fullName = 'file:///sdcard' + assetsDir.fullPath + '/' + fileName;
+                if(config.no_cdvfile_protocol){
+                    fullName = 'file:///sdcard' + assetsDir.fullPath + '/' + fileName;
+                } else {
+                    fullName =   assetsDir.toURL() + '/' + fileName;
+                }
             }
 
             // initialise record point with user's current location
