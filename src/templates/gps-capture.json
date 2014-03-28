@@ -26,5 +26,12 @@
                 "value": "Show/Hide Route"
             }
         }
+    },
+	"popups": {
+        "popup1":{
+            "template": "annotation-detail-popup.html",
+            "data": {
+            }
+        }
     }
 }

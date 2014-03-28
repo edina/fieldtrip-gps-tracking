@@ -134,6 +134,8 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
                                                      'url("css/images/play.png")');
         }
 
+
+
         if(tracks.gpsTrackPaused()){
             changeToResume();
         }
@@ -181,8 +183,13 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
 
         // kick off capture
         tracks.gpsTrack(currentGpsAnnotation, debugGPS());
-
+       
+        if(utils.showRecordsOnGpsTrackingPage()){
+            map.showRecordsLayer();
+        }
+       
         map.hideAnnotateLayer();
+       
     };
 
     // load spectrum js and css files for colour picker
