@@ -21,28 +21,20 @@
   <!--   </div> -->
   <!-- </div> -->
   {{header}}
-
+  
+  {% if body["page-header"]|length > 0 %}
   <div class="menu" data-role="navbar">
-    <ul id="gpscapture-header-control">
+    <ul>
+      {% for key, items in body["page-header"].iteritems() %}
+      {% if items.keys()|length >0%}
       <li>
-        <a id="gpscapture-stop-button"
-           href="#gpscapture-confirm-popup"
-           data-icon="custom"
-           data-rel="popup"
-           data-position-to="window">Stop</a>
+        <a {% for i, item in items["a"].iteritems()%} {%if i != "platforms" %}{{i}}="{{item}}" {% endif %}{% endfor %}>{{items["value"]}}</a>
       </li>
-      <li>
-        <a id="gpscapture-pause-play"
-           data-icon="custom">
-          <span class="ui-btn-text">Pause</span>
-        </a>
-      </li>
-      <li>
-        <a id="gpscapture-toggle-route"
-           data-icon="custom">Show/Hide Route</a>
-      </li>
+      {% endif %}
+      {% endfor %}
     </ul>
   </div>
+  {% endif %}
 
   <div data-role="content">
 

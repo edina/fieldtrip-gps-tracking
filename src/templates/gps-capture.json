@@ -1,3 +1,30 @@
 {
-
+    "body": {
+        "page-header": {
+            "item1": {
+                "a": {
+                    "id": "gpscapture-stop-button",
+                    "href": "#gpscapture-confirm-popup",
+                    "data-icon": "custom",
+                    "data-rel": "popup",
+                    "data-position-to": "window"
+                },
+                "value": "Stop"
+            },
+            "item2": {
+                "a": {
+                    "id": "gpscapture-pause-play",
+                    "data-icon": "custom"
+                },
+                "value": "Pause"
+            },
+            "item3": {
+                "a": {
+                    "id": "gpscapture-toggle-route",
+                    "data-icon": "custom"
+                },
+                "value": "Show/Hide Route"
+            }
+        }
+    }
 }
