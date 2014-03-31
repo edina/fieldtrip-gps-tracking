@@ -42,7 +42,7 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
     var gpsTrackWatchID;
 
     // add new layer for real-time tracks
-    var gpsTrackLayer = map.addLayer({ 
+    var gpsTrackLayer = map.addLayer({
         id: 'gpsTrack',
         style:{
             colour: 'red',
@@ -336,7 +336,7 @@ var _this = {
             var fullName;
 
             var assetsDir = records.getAssetsDir();
-       
+
             if(assetsDir){
                 // TODO problem with cordova 3, it doesn't return the file:///
                 // prototcol in the fullPath property of files and directories.
@@ -397,7 +397,6 @@ var _this = {
     gpsCaptureComplete: function(){
         if(typeof(this.currentTrack) !== 'undefined'){
             var annotation = records.getSavedRecord(this.currentTrack.id);
-
             this.gpsTrackPause();
 
             // populate record with start location

@@ -67,12 +67,12 @@ define(['ui', 'map', 'utils', 'settings', 'config', './tracks'], function(ui, ma
         });
 
         // listen on start button
-        $('#annotate-gps-form-ok').click($.proxy(function(event){
+        $('#annotate-gps-form-ok').click(function(event){
             $('#annotate-gps-form').submit();
-        }, this));
+        });
 
         // form submitted
-        $('#annotate-gps-form').submit($.proxy(function(event){
+        $('#annotate-gps-form').submit(function(event){
             if($('#annotate-gps-form-title').val().length === 0){
                 $('#annotate-gps-form-title').addClass('ui-focus');
                 utils.inform('Required field not populated');
@@ -111,8 +111,7 @@ define(['ui', 'map', 'utils', 'settings', 'config', './tracks'], function(ui, ma
             }
 
             return false;
-        }, this));
-
+        });
     };
 
     /**
@@ -132,7 +131,14 @@ define(['ui', 'map', 'utils', 'settings', 'config', './tracks'], function(ui, ma
             $("#gpscapture-pause-play .ui-btn-text").text('Resume');
             $("#gpscapture-pause-play .ui-icon").css('background-image',
                                                      'url("css/images/play.png")');
-        }
+        };
+
+        var gotoPage = function(page){
+            if(typeof(config.leave_after_gps_save_discard) === 'undefined' ||
+               utils.str2bool(config.go_to_map_after_gps_save)){
+                $.mobile.changePage(map);
+            }
+        };
 
         if(tracks.gpsTrackPaused()){
             changeToResume();
@@ -141,20 +147,16 @@ define(['ui', 'map', 'utils', 'settings', 'config', './tracks'], function(ui, ma
         // save GPS route
         $('#gpscapture-confirm-save').click(function(e){
             tracks.gpsCaptureComplete();
-
-            if(typeof(config.go_to_map_after_gps_save) === 'undefined' ||
-               utils.str2bool(config.go_to_map_after_gps_save)){
-                $.mobile.changePage('map.html');
-            }
+            gotoPage('map.html');
         });
 
         // cancel GPS route save
-        $('#gpscapture-confirm-cancel').click($.proxy(function(){
+        $('#gpscapture-confirm-cancel').click(function(){
             tracks.gpsTrack();
-        }, this));
+        });
 
         // pause/resume GPS track button
-        $('#gpscapture-pause-play').click($.proxy(function(){
+        $('#gpscapture-pause-play').click(function(){
             if($("#gpscapture-pause-play").text().trim() === 'Pause'){
                 tracks.gpsTrackPause();
                 changeToResume();
@@ -168,20 +170,20 @@ define(['ui', 'map', 'utils', 'settings', 'config', './tracks'], function(ui, ma
             }
 
             $('#gpscapture-pause-play').removeClass('ui-btn-active');
-        }, this));
+        });
 
         // toogle track visibility
-        $('#gpscapture-toggle-route').click($.proxy(function(){
+        $('#gpscapture-toggle-route').click(function(){
             tracks.gpsTrackToggle();
             $('#gpscapture-toggle-route').removeClass('ui-btn-active');
-        }, this));
+        });
 
         // discard track
-        $('#gpscapture-confirm-discard').click($.proxy(function(){
+        $('#gpscapture-confirm-discard').click(function(){
             tracks.gpsCaptureDiscard();
             $('#gpscapture-toggle-route').removeClass('ui-btn-active');
-            $.mobile.changePage('index.html');
-        }, this));
+            gotoPage('index.html');
+        });
 
         // kick off capture
         tracks.gpsTrack(currentGpsAnnotation, debugGPS());
@@ -191,7 +193,6 @@ define(['ui', 'map', 'utils', 'settings', 'config', './tracks'], function(ui, ma
         }
 
         map.hideAnnotateLayer();
-
     };
 
     // load spectrum js and css files for colour picker
