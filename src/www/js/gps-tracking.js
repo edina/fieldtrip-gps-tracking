@@ -31,7 +31,7 @@ DAMAGE.
 
 "use strict";
 
-define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, settings, tracks){
+define(['ui', 'map', 'utils', 'settings', 'config', './tracks'], function(ui, map, utils, settings, config, tracks){
     var currentGpsAnnotation;
 
     /**
@@ -134,8 +134,6 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
                                                      'url("css/images/play.png")');
         }
 
-
-
         if(tracks.gpsTrackPaused()){
             changeToResume();
         }
@@ -143,7 +141,11 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
         // save GPS route
         $('#gpscapture-confirm-save').click(function(e){
             tracks.gpsCaptureComplete();
-            utils.gotoHomePage();
+
+            if(typeof(config.go_to_map_after_gps_save) === 'undefined' ||
+               utils.str2bool(config.go_to_map_after_gps_save)){
+                $.mobile.changePage('map.html');
+            }
         });
 
         // cancel GPS route save
@@ -183,13 +185,13 @@ define(['ui', 'map', 'utils', 'settings', './tracks'], function(ui, map, utils, 
 
         // kick off capture
         tracks.gpsTrack(currentGpsAnnotation, debugGPS());
-       
-        if(utils.showRecordsOnGpsTrackingPage()){
+
+        if(config.show_records_on_gps_tracking_page){
             map.showRecordsLayer();
         }
-       
+
         map.hideAnnotateLayer();
-       
+
     };
 
     // load spectrum js and css files for colour picker
