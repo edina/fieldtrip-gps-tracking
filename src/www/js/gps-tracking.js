@@ -107,6 +107,10 @@ define(['ui', 'map', 'utils', 'settings', 'config', './tracks'], function(ui, ma
                 };
 
                 utils.hideKeyboard();
+
+                // kick off capture
+                tracks.gpsTrack(currentGpsAnnotation, debugGPS());
+
                 $.mobile.changePage('gps-capture.html');
             }
 
@@ -146,6 +150,7 @@ define(['ui', 'map', 'utils', 'settings', 'config', './tracks'], function(ui, ma
 
         // save GPS route
         $('#gpscapture-confirm-save').click(function(e){
+            currentGpsAnnotation = undefined;
             tracks.gpsCaptureComplete();
             gotoPage('map.html');
         });
@@ -180,13 +185,11 @@ define(['ui', 'map', 'utils', 'settings', 'config', './tracks'], function(ui, ma
 
         // discard track
         $('#gpscapture-confirm-discard').click(function(){
+            currentGpsAnnotation = undefined;
             tracks.gpsCaptureDiscard();
             $('#gpscapture-toggle-route').removeClass('ui-btn-active');
             gotoPage('index.html');
         });
-
-        // kick off capture
-        tracks.gpsTrack(currentGpsAnnotation, debugGPS());
 
         if(config.show_records_on_gps_tracking_page){
             map.showRecordsLayer();
