@@ -206,9 +206,6 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
      *
      */
     var checkPopups = function() {
-        var point = map.map.center;
-        var lon = point.lon;
-        var lat = point.lat;
 
         var a = sessionStorage.getItem('annotationPopup');
         if (a !== 'undefined') {
@@ -216,7 +213,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
             var annotation = $.parseJSON(a);
 
             if (annotation) {
-                map.createPopup(annotation, lat, lon);
+                map.createPopup(annotation);
                 $('#map-record-popup').popup('open');
             }
 
