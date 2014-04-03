@@ -31,7 +31,7 @@ DAMAGE.
 
 "use strict";
 
-define(['ui', 'map', 'utils', 'settings', 'config', './tracks'], function(ui, map, utils, settings, config, tracks){
+define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], function(ui, records,  map, utils, settings, config, tracks){
     var currentGpsAnnotation;
 
     /**
@@ -198,6 +198,26 @@ define(['ui', 'map', 'utils', 'settings', 'config', './tracks'], function(ui, ma
         map.hideAnnotateLayer();
     };
 
+    var checkPopups = function() {
+        var point = map.map.center;
+        var lon = point.lon;
+        var lat = point.lat;
+
+        var a = sessionStorage.getItem('annotationPopup');
+        if (a !== 'undefined') {
+
+            var annotation = $.parseJSON(a);
+
+            if (annotation) {
+                map.createPopup(annotation, lat, lon);
+                $('#map-record-popup').popup('open');
+            }
+
+            // Clean up
+            sessionStorage.removeItem('annotationPopup');
+        }
+    };
+
     // load spectrum js and css files for colour picker
     $.getScript('js/ext/spectrum.js');
     $('head').prepend('<link rel="stylesheet" href="css/ext/spectrum.css" type="text/css" />');
@@ -210,6 +230,8 @@ define(['ui', 'map', 'utils', 'settings', 'config', './tracks'], function(ui, ma
 
     // the page that the track runs on
     $(document).on('pageinit', '#gpscapture-page', gpsCapturePage);
+
+    $(document).on('pageshow', '#gpscapture-page', checkPopups);
     $(document).on(
         'pageshow',
         '#gpscapture-page',
