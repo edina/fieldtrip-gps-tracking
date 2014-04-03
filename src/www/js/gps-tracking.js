@@ -198,6 +198,13 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
         map.hideAnnotateLayer();
     };
 
+    /**
+     * checkPopups  
+     * If an annotation has been stored in sessionStorage 
+     * with key annotationPopup, the appropriate popup
+     * will be shown automatically
+     *
+     */
     var checkPopups = function() {
         var point = map.map.center;
         var lon = point.lon;
@@ -231,6 +238,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
     // the page that the track runs on
     $(document).on('pageinit', '#gpscapture-page', gpsCapturePage);
 
+    // Check if annotation popup should be shown automatically
     $(document).on('pageshow', '#gpscapture-page', checkPopups);
     $(document).on(
         'pageshow',
