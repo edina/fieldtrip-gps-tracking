@@ -338,13 +338,10 @@ var _this = {
             var assetsDir = records.getAssetsDir();
 
             if(assetsDir){
-                // TODO problem with cordova 3, it doesn't return the file:///
-                // prototcol in the fullPath property of files and directories.
-                // Below will not work for IOS or people with no sdcard!
                 if(config.no_cdvfile_protocol){
-                    fullName = 'file:///sdcard' + assetsDir.fullPath + '/' + fileName;
+                    fullName = assetsDir.toNativeURL() + '/' + fileName;
                 } else {
-                    fullName =   assetsDir.toURL() + '/' + fileName;
+                    fullName = assetsDir.toURL() + '/' + fileName;
                 }
             }
 
