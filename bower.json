@@ -7,10 +7,10 @@
     "keywords": [
         "fieldtrip-open",
         "gps",
-        "gpx",
+        "gpx"
     ],
     "license": "BSD",
     "ignore": [
-        "**/.*",
+        "**/.*"
     ]
 }
