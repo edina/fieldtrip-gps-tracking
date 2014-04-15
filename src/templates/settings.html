@@ -1,10 +1,9 @@
 <div data-role="fieldcontain">
   <label for="settings-debug-gps">Debug GPS:</label>
-    <select data-role="slider" id="settings-debug-gps" name="settings-entry">
-    {% if settings|length > 0 %}
-      {% for key, value in settings.iteritems() %}
-      <option value="{{value}}">{{key}}</option>
-      {% endfor %}
-    {% endif %}
+    <select id="settings-debug-gps"
+      data-role="slider"
+      name="settings-entry">
+      <option value="off">Off</option>
+      <option value="on">On</option>
     </select>
 </div>
