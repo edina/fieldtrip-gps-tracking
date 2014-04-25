@@ -3,7 +3,7 @@
   {{header}}
 
   {% if body["page-header"]|length > 0 %}
-  <div class="menu" data-role="navbar">
+  <div class="menu second-header" data-role="navbar">
     <ul>
       {% for key, items in body["page-header"].iteritems() %}
       {% if items.keys()|length >0%}
