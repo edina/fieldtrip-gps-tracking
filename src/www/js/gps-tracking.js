@@ -121,8 +121,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
      * Should GPS tracking be run in debug mode?
      */
     var debugGPS = function(){
-        var gpsDebug = settings.get('debug-gps') ;
-        return settings.get('debug-gps').val === 'on';
+        return settings.get('debug-gps') === 'on';
     };
 
     /**
@@ -199,8 +198,8 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
     };
 
     /**
-     * checkPopups  
-     * If an annotation has been stored in sessionStorage 
+     * checkPopups
+     * If an annotation has been stored in sessionStorage
      * with key annotationPopup, the appropriate popup
      * will be shown automatically
      *
