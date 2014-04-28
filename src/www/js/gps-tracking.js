@@ -110,7 +110,6 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
 
                 // kick off capture
                 tracks.gpsTrack(currentGpsAnnotation, debugGPS());
-
                 $.mobile.changePage('gps-capture.html');
             }
 
@@ -122,7 +121,8 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
      * Should GPS tracking be run in debug mode?
      */
     var debugGPS = function(){
-        return settings.get('debug-gps') === 'on';
+        var gpsDebug = settings.get('debug-gps') ;
+        return settings.get('debug-gps').val === 'on';
     };
 
     /**
