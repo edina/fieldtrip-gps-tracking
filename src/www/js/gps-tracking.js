@@ -197,30 +197,6 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
         map.hideAnnotateLayer();
     };
 
-    /**
-     * checkPopups
-     * If an annotation has been stored in sessionStorage
-     * with key annotationPopup, the appropriate popup
-     * will be shown automatically
-     *
-     */
-    var checkPopups = function() {
-
-        var a = sessionStorage.getItem('annotationPopup');
-        if (a !== 'undefined') {
-
-            var annotation = $.parseJSON(a);
-
-            if (annotation) {
-                map.createPopup(annotation);
-                $('#map-record-popup').popup('open');
-            }
-
-            // Clean up
-            sessionStorage.removeItem('annotationPopup');
-        }
-    };
-
     // load spectrum js and css files for colour picker
     $.getScript('js/ext/spectrum.js');
     $('head').prepend('<link rel="stylesheet" href="css/ext/spectrum.css" type="text/css" />');
@@ -235,7 +211,6 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
     $(document).on('pageinit', '#gpscapture-page', gpsCapturePage);
 
     // Check if annotation popup should be shown automatically
-    $(document).on('pageshow', '#gpscapture-page', checkPopups);
     $(document).on(
         'pageshow',
         '#gpscapture-page',
