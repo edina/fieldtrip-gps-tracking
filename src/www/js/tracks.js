@@ -276,7 +276,24 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
             );
         }
     };
+   
+    /**
+    * hide a single track
+    * @param id record id
+    * @param track record object
+    **/
+     
+    var hideGPSTrack = function(id)
+    {
+        // prepend layer name with gps-track
+        var name = "gps-track-" + id;
 
+        var layer = map.getLayer(name);
+        if(layer){
+            map.removeLayer(layer);
+        }
+
+    }
     /**
      * Display a single GPS Track.
      * @param id Annotation / record id.
@@ -315,7 +332,11 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
         layer.setVisibility(true);
 
         layer.events.register("loadend", this, function() {
-            map.zoomToExtent(layer.getDataExtent());
+            var extent = layer.getDataExtent() ;
+            if(extent !== null)
+            {
+                  map.zoomToExtent(layer.getDataExtent());
+            }
         });
     };
 
@@ -509,6 +530,32 @@ var _this = {
     gpsTrackToggle: function(){
         gpsTrackLayer.setVisibility(!gpsTrackLayer.visibility);
     },
+
+    /**
+     * public method to display specified GPS track
+    */
+
+    displayTrack: function(id, annotation){
+       showGPSTrack(id,
+                         records.getSavedRecord(id));
+
+    },
+    hideAllTracks: function()
+    {
+       var filteredRecords = records.getSavedTracks() ;
+       $.each(filteredRecords, function(id)
+        {
+            hideGPSTrack(id)
+        }) ; 
+
+    } ,
+    hideTrack: function(id){
+
+       hideGPSTrack(id) ;
+    },
+
+   //TODO hideTrack
+
 };
 
 return _this;
