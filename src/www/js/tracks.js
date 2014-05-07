@@ -31,6 +31,8 @@ DAMAGE.
 
 "use strict";
 
+/* global XMLSerializer, OpenLayers */
+
 define(['map', 'records', 'utils','config'], function(map, records, utils, config){
     var GPS_ACCURACY = 50;
     var GPS_AUTO_SAVE_THRESHOLD = 5;
@@ -150,7 +152,7 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
                 coords = {
                     'lon': features[0].x,
                     'lat': features[0].y,
-                }
+                };
             }
             else{
                 console.debug("No components in geometry");
@@ -260,7 +262,7 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
                         'accuracy': Math.random() * 100
                     },
                     'timestamp': now.getTime()
-                }
+                };
                 onSuccess(position);
             }, 1000);
         }
@@ -276,15 +278,12 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
             );
         }
     };
-   
+
     /**
-    * hide a single track
-    * @param id record id
-    * @param track record object
-    **/
-     
-    var hideGPSTrack = function(id)
-    {
+     * hide a single track.
+     * @param id Annotation id.
+     **/
+    var hideGPSTrack = function(id){
         // prepend layer name with gps-track
         var name = "gps-track-" + id;
 
@@ -293,11 +292,12 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
             map.removeLayer(layer);
         }
 
-    }
+    };
+
     /**
      * Display a single GPS Track.
-     * @param id Annotation / record id.
-     * @param track Annotation / record object.
+     * @param id Annotation id.
+     * @param track Annotation object.
      */
     var showGPSTrack = function(id, track){
         // prepend layer name with gps-track
@@ -321,7 +321,7 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
         }
 
         // create layer with the GPX track
-        var layer = map.addGPXLayer({
+        var gpxLayer = map.addGPXLayer({
             id: name,
             style:{
                 colour: colour,
@@ -329,17 +329,16 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
             url: trackField.val
         });
 
-        layer.setVisibility(true);
-
-        layer.events.register("loadend", this, function() {
-            var extent = layer.getDataExtent() ;
-            if(extent !== null)
-            {
-                  map.zoomToExtent(layer.getDataExtent());
+        gpxLayer.setVisibility(true);
+        gpxLayer.events.register("loadend", this, function() {
+            var extent = layer.getDataExtent();
+            if(extent !== null){
+                map.zoomToExtent(extent);
             }
         });
     };
 
+    /************************** public interface  ******************************/
 
 var _this = {
 
@@ -372,7 +371,7 @@ var _this = {
                 'lon': start.lon,
                 'lat': start.lat,
                 'alt': start.gpsPosition.altitude
-            }
+            };
 
             annotation.record.fields[1].val = fullName;
             var id = records.saveAnnotation(undefined, annotation);
@@ -402,7 +401,7 @@ var _this = {
                 'id': id,
                 'file': fileName,
                 'doc': doc
-            }
+            };
 
             // kick off tracking
             this.gpsTrackPlay(annotation.rate, debug);
@@ -532,30 +531,20 @@ var _this = {
     },
 
     /**
-     * public method to display specified GPS track
-    */
-
-    displayTrack: function(id, annotation){
-       showGPSTrack(id,
-                         records.getSavedRecord(id));
-
-    },
-    hideAllTracks: function()
-    {
-       var filteredRecords = records.getSavedTracks() ;
-       $.each(filteredRecords, function(id)
-        {
-            hideGPSTrack(id)
-        }) ; 
-
-    } ,
+     * Switch gps track layer on/off.
+     * @param id Annotation id.
+     */
     hideTrack: function(id){
-
-       hideGPSTrack(id) ;
+        hideGPSTrack(id);
     },
 
-   //TODO hideTrack
-
+    /**
+     * Display specified GPS track.
+     * @param id Annotation id.
+     */
+    showTrack: function(id){
+        showGPSTrack(id, records.getSavedRecord(id));
+    },
 };
 
 return _this;
