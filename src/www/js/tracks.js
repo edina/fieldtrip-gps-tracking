@@ -358,7 +358,7 @@ var _this = {
             var assetsDir = records.getAssetsDir();
 
             if(assetsDir){
-                if(config.no_cdvfile_protocol){
+                if(config.noCdvFileProtocol){
                     fullName = assetsDir.toNativeURL() + '/' + fileName;
                 } else {
                     fullName = assetsDir.toURL() + '/' + fileName;

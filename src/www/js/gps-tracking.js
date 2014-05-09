@@ -137,8 +137,8 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
         };
 
         var gotoPage = function(page){
-            if(typeof(config.leave_after_gps_save_discard) === 'undefined' ||
-               utils.str2bool(config.go_to_map_after_gps_save)){
+            if(typeof(config.leaveAfterGpsSaveDiscard) === 'undefined' ||
+               utils.str2bool(config.goToMapAfterGpsSave)){
                 $.mobile.changePage(map);
             }
         };
@@ -190,7 +190,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
             gotoPage('index.html');
         });
 
-        if(config.show_records_on_gps_tracking_page){
+        if(config.showRecordsOnGpsTrackingPage){
             map.showRecordsLayer();
         }
 
