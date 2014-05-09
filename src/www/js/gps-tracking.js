@@ -31,7 +31,8 @@ DAMAGE.
 
 "use strict";
 
-define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], function(ui, records,  map, utils, settings, config, tracks){
+define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], function(// jshint ignore:line
+    ui, records,  map, utils, settings, config, tracks){
     var currentGpsAnnotation;
 
     /**
@@ -137,9 +138,9 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
         };
 
         var gotoPage = function(page){
-            if(typeof(config.leaveAfterGpsSaveDiscard) === 'undefined' ||
-               utils.str2bool(config.goToMapAfterGpsSave)){
-                $.mobile.changePage(map);
+            if(typeof(config.leaveaftergpssavediscard) === 'undefined' ||
+               utils.str2bool(config.gotomapaftergpssave)){
+                $.mobile.changePage(page);
             }
         };
 
@@ -148,7 +149,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
         }
 
         // save GPS route
-        $('#gpscapture-confirm-save').click(function(e){
+        $('#gpscapture-confirm-save').click(function(){
             currentGpsAnnotation = undefined;
             tracks.gpsCaptureComplete();
             gotoPage('map.html');

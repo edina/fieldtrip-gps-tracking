@@ -33,7 +33,8 @@ DAMAGE.
 
 /* global XMLSerializer, OpenLayers */
 
-define(['map', 'records', 'utils','config'], function(map, records, utils, config){
+define(['map', 'records', 'utils','config'], function(// jshint ignore:line
+    map, records, utils, config){
     var GPS_ACCURACY = 50;
     var GPS_AUTO_SAVE_THRESHOLD = 5;
     var GPS_ACCURACY_FLAG = false;
@@ -111,7 +112,6 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
 
         var assetsDir = records.getAssetsDir();
         if(assetsDir){
-            var assetsDirPath = assetsDir.fullPath;
             var fileName = _this.currentTrack.file;
             assetsDir.getFile(
                 fileName,
@@ -120,7 +120,7 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
                     fileEntry.createWriter(
                         function(writer){
                             writer.onwrite = function(evt) {
-                                console.debug('GPX file ' + fileName + ' written to ' + assetsDirPath);
+                                console.debug('GPX file ' + fileName + ' written to ' + assetsDir.fullPath);
                             };
                             writer.write(sXML);
 
@@ -302,7 +302,6 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
     var showGPSTrack = function(id, track){
         // prepend layer name with gps-track
         var name = "gps-track-" + id;
-
         var layer = map.getLayer(name);
         if(layer){
             // its possible for different tracks to have the same name so remove
@@ -331,7 +330,7 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
 
         gpxLayer.setVisibility(true);
         gpxLayer.events.register("loadend", this, function() {
-            var extent = layer.getDataExtent();
+            var extent = gpxLayer.getDataExtent();
             if(extent !== null){
                 map.zoomToExtent(extent);
             }
