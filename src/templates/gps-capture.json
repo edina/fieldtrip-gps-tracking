@@ -32,6 +32,14 @@
             "template": "annotation-detail-popup.html",
             "data": {
             }
+        },
+        "popup2":{
+            "template": "saved-records-popup1.html",
+            "data": {
+                "question": "Are you sure you want to delete record",
+                "cancel": "Cancel",
+                "delete": "Delete"
+            }
         }
     }
 }
