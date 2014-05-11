@@ -58,6 +58,10 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
     });
 
     // listen for clicks on tracks
+ /* click listener has now moved to spatial memories plugin possibly should 
+  * come back home to tracks.js as handling track icon clicks ?
+ */
+/*
     map.addRecordClickListener(function(feature){
         var isTrack = false;
         if(feature.attributes.type === 'track'){
@@ -68,6 +72,7 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
 
         return isTrack;
     });
+  */
 
     /**
      * Save current GPS position to GPX doc. Periodically auto save the doc to file.
