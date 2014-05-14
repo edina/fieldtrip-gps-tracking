@@ -57,6 +57,34 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
         image: 'css/images/routemarker.png'
     });
 
+
+
+    /**
+     * checkPopups
+     * If an annotation has been stored in sessionStorage
+     * with key annotationPopup, the appropriate popup
+     * will be shown automatically
+     *
+     */
+    var checkPopups = function() {
+
+        var a = sessionStorage.getItem('annotationPopup');
+        if (a !== 'undefined') {
+
+            var annotation = $.parseJSON(a);
+
+            if (annotation) {
+                map.createPopup(annotation);
+                $('#map-record-popup').popup('open');
+            }
+
+            // Clean up
+            sessionStorage.removeItem('annotationPopup');
+        }
+    };
+
+    $(document).on('pageshow', '#gpscapture-page', checkPopups);
+
     // listen for clicks on tracks
  /* click listener has now moved to spatial memories plugin possibly should 
   * come back home to tracks.js as handling track icon clicks ?
