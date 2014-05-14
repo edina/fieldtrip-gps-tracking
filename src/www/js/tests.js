@@ -2,7 +2,7 @@
 
 define(['./tracks'], function(tracks){
     var run = function() {
-        module("Map Search");
+        module("GPS Tracking");
     };
     return {run: run};
 });
