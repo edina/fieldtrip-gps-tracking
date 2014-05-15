@@ -135,8 +135,9 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
             $("#gpscapture-pause-play .ui-icon").css('background-image',
                                                      'url("css/images/play.png")');
         };
-
-        var gotoPage = function(page){
+       
+        $("#make-nav-bar-no-scroll").on( "scrollstart", function( e ) { e.preventDefault()} );
+                  var gotoPage = function(page){
             if(typeof(config.leave_after_gps_save_discard) === 'undefined' ||
                utils.str2bool(config.go_to_map_after_gps_save)){
                 $.mobile.changePage(map);
