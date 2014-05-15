@@ -357,11 +357,7 @@ var _this = {
             var assetsDir = records.getAssetsDir();
 
             if(assetsDir){
-                if(config.noCdvFileProtocol){
-                    fullName = assetsDir.toNativeURL() + '/' + fileName;
-                } else {
-                    fullName = assetsDir.toURL() + '/' + fileName;
-                }
+                fullName = utils.getFilePath(assetsDir) + '/' + fileName;
             }
 
             // initialise record point with user's current location
