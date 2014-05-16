@@ -438,7 +438,8 @@ var _this = {
                 gpsCaptureSave(function(){
                     // removing all annotation will force a refresh
                     map.getRecordsLayer().removeAllFeatures();
-
+                    // Show annotations
+                    map.showRecordsForTrack(id);
                     // display saved track on map
                     showGPSTrack(id, annotation);
                 });
