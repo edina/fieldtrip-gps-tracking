@@ -440,6 +440,7 @@ var _this = {
                     map.getRecordsLayer().removeAllFeatures();
                     // Show annotations
                     map.showRecordsForTrack(id);
+                    map.showTrackRecords();
                     // display saved track on map
                     showGPSTrack(id, annotation);
                 });
