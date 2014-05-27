@@ -233,6 +233,7 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
 
         // timeout has been reached
         var onError = function(position){
+            // TODO add message to a live region so screen reader can respond
             utils.inform('Waiting for GPS signal');
         };
 
@@ -374,6 +375,7 @@ var _this = {
             }
 
             // initialise record point with user's current location
+            // TODO check start position is a good one
             var start = map.getUserCoords();
             annotation.record.point = {
                 'lon': start.lon,
