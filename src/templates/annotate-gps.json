@@ -1,8 +1,8 @@
 {
     "body": {
         "title": "Title",
-        "description": "Description",
-        "start": "Start",
+        "description": "Track Description",
+        "start": "Start Track",
         "rate-text": "Capture Rate",
         "rate-5": "5 seconds",
         "rate-10": "10 seconds",
