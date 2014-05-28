@@ -143,6 +143,20 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
             );
         }
     };
+    
+    /**
+    * @returns recommended zoom level for gsp accuracy in meters 
+    * if accuracy is undefined then 
+    */
+    var getZoomLevelForAccurancy = function(accuracy){
+    
+       
+        var zoomlevel=16;     // Start zoomed in almost all the way
+        if (accuracy > 80)    // Zoom out for less accurate positions
+            zoomlevel -= Math.round(Math.log(accuracy/50)/Math.LN2);
+        return zoomlevel;
+    }
+    
 
     /**
      * @return Start position of current GPS track.
@@ -211,6 +225,20 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
                         position.coords.longitude,
                         position.coords.latitude)
                 );
+       
+       
+                map.userLonLat =  new OpenLayers.LonLat(
+                        position.coords.longitude,
+                        position.coords.latitude);
+       
+       
+                var accuracyInMeters = position.coords.accuracy;
+       
+                map.updateLocateLayer(getZoomLevelForAccurancy(accuracyInMeters));
+       
+       
+       
+       
 
                 var point = new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat);
                 gpsTrackLayer.features[0].geometry.addPoint(point);
@@ -503,6 +531,7 @@ var _this = {
      * @param debug Use debug mode?
      */
     gpsTrackPlay: function(captureRate, debug){
+        
         var cr = captureRate * 1000; // in milliseconds
 
         // continue tracking
