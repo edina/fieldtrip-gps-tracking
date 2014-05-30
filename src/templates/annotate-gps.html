@@ -7,28 +7,28 @@
       <form id="annotate-gps-form" data-ajax="false" accept-charset="utf-8">
         <div>
           <label for="annotate-gps-form-title">{{body["title"]}}</label>
-	  <h1>
+	  
           <input id="annotate-gps-form-title"
                  type="text"
                  value="track"
                  required="true",
-                 maxlength="40">
-	    </h1>
+                 maxlength="40" aria-flowto=""annotate-gps-form-description"/>
+	    
         </div>
 
         <div>
           <label for="annotate-gps-form-description">{{body["description"]}}</label>
-          <textarea id="annotate-gps-form-description"></textarea>
+          <textarea id="annotate-gps-form-description" aria-flowto="annotate-gps-form-ok"></textarea>
         </div>
 
         <div class="ui-grid-b">
           <div class="ui-block-a">
-            <a href="#" id="annotate-gps-form-ok">
-	      <h1>
-              <img src="css/images/startgpscapture.png" alt="Start GPS Track" tabindex=1></img>
-	      </h1>
+            <a href="#" id="annotate-gps-form-ok" role="button" aria-flowto="annotate-gps-form-rate">
+	      
+              <img src="css/images/startgpscapture.png" alt="Start new GPS Track" role="button"></img>
+	      
             </a>
-            <p>{{body["start"]}}</p>
+            <p role="presentation">{{body["start"]}}</p>
           </div>
 
           <div class="ui-block-b">
