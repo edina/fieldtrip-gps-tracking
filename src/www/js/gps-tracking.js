@@ -195,6 +195,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
         if(config.show_records_on_gps_tracking_page){
             // map.showRecordsLayer();
             map.showTrackRecords() ;
+            
 
         }
 
@@ -219,7 +220,9 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
         'pageshow',
         '#gpscapture-page',
         function(){
+           // map.addAltTags() ;
             map.updateSize();
+           
         }
     );
 
