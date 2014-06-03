@@ -148,13 +148,21 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
     * @returns recommended zoom level for gsp accuracy in meters 
     * if accuracy is undefined then 
     */
-    var getZoomLevelForAccurancy = function(accuracy){
+    var getZoomLevelForAccurancyFunction = function(numberOfAttempts){
     
+        var zoomLevelForAccurancy = function(accuracy){
+            console.log("number of attempts " + numberOfAttempts);
+            if(numberOfAttempts-- < 0){
+                return;
+            }
+            var zoomlevel=16;     // Start zoomed in almost all the way
+            if (accuracy > 80) {   // Zoom out for less accurate positions
+                zoomlevel -= Math.round(Math.log(accuracy/50)/Math.LN2);
+            }
+            map.updateLocateLayer(zoomlevel);
+        }
        
-        var zoomlevel=16;     // Start zoomed in almost all the way
-        if (accuracy > 80)    // Zoom out for less accurate positions
-            zoomlevel -= Math.round(Math.log(accuracy/50)/Math.LN2);
-        return zoomlevel;
+        return zoomLevelForAccurancy;
     }
     
 
@@ -207,6 +215,10 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
             var line = new OpenLayers.Geometry.LineString([]);
             gpsTrackLayer.addFeatures([new OpenLayers.Feature.Vector(line)]);
         }
+       
+               
+        var numberOfAttempts = 4;
+        var updateZoomLevelForGspAccuracy = getZoomLevelForAccurancyFunction(numberOfAttempts);
 
         // found location
         var onSuccess = function(position){
@@ -233,8 +245,8 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
        
        
                 var accuracyInMeters = position.coords.accuracy;
-       
-                map.updateLocateLayer(getZoomLevelForAccurancy(accuracyInMeters));
+
+                updateZoomLevelForGspAccuracy(accuracyInMeters);
        
        
        
@@ -262,7 +274,24 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
         // timeout has been reached
         var onError = function(position){
             // TODO add message to a live region so screen reader can respond
-            utils.inform('Waiting for GPS signal');
+            console.log('Waiting for GPS signal');
+            //keep retrying
+            console.log('Retrying');
+            setTimeout(function(){
+                gpsTrackWatchID = navigator.geolocation.watchPosition(
+                onSuccess,
+                onError,
+                {
+                    enableHighAccuracy: map.GPS_ACCURACY_FLAG,
+                    maximumAge: interval,
+                    timeout: 30000,
+                }
+            );
+
+            }, 5000);
+
+       
+            utils.inform('Waiting for GPS signal', 5000);
         };
 
         // clear watch if already defined
