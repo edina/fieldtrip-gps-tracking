@@ -437,9 +437,16 @@ var _this = {
             annotation.record.point = {
                 'lon': start.lon,
                 'lat': start.lat,
-                'alt': start.gpsPosition.altitude
+                'alt': 0 
             }
 
+            // add altitude if available
+            if(start.gpsPosition !== undefined && start.gpsPosition !== null)
+            {
+                annotation.record.point.alt = start.gpsPosition.altitude ;                
+            }
+            
+            
             annotation.record.fields[1].val = fullName;
             var id = records.saveAnnotation(undefined, annotation);
 
