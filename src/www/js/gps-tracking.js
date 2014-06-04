@@ -47,26 +47,18 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
             localStorage.setItem(tracks.COLOUR_INDEX, 'red');
         }
 
-        // we need to add colour picker input dynamically otherwise
-        // JQM will attempt to format the input element
-        // TODO make this accessible to screen reader
-        $('#annotate-gps-colour-pick').append('<input id="annotate-gps-colour-pick-input" type="color" name="color" />');
+        
 
-        utils.appendDateTimeToInput("#annotate-gps-form-title");
-
-        $("#annotate-gps-colour-pick-input").spectrum({
-            showPalette: true,
-            showPaletteOnly: true,
-            color: colour,
-            change: function(color){
-                localStorage.setItem(tracks.COLOUR_INDEX, color.toString());
-            },
-            palette: [
-                ['red', 'orange', 'yellow', 'green'],
-                ['blue', 'pink', 'white', 'black']
-            ]
-        });
-
+        
+        
+         $("#annotate-gps-colour-pick").change(function(color){
+            
+                var $index = $('#annotate-gps-colour-pick option:selected').val();
+                localStorage.setItem(tracks.COLOUR_INDEX, $index);
+            });
+         
+        
+        
         // listen on start button
         $('#annotate-gps-form-ok').click(function(event){
             $('#annotate-gps-form').submit();
