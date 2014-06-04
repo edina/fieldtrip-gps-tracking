@@ -12,7 +12,7 @@
                  type="text"
                  value="track"
                  required="true",
-                 maxlength="40" aria-flowto=""annotate-gps-form-description"/>
+                 maxlength="40" aria-flowto=""annotate-gps-form-description" tabindex=1/>
 	    
         </div>
 
@@ -23,12 +23,13 @@
 
         <div class="ui-grid-b">
           <div class="ui-block-a">
-            <a href="#" id="annotate-gps-form-ok" role="button" aria-flowto="annotate-gps-form-rate">
+            <a href="#" id="annotate-gps-form-ok" role="button" aria-flowto="annotate-gps-form-rate" aria-label="Start recording a new track">
 	      
-              <img src="css/images/startgpscapture.png" alt="Start new GPS Track" role="button"></img>
+              <img src="css/images/startgpscapture.png" alt="Icon for Start new GPS Track button" role="presentation"></img>
 	      
             </a>
-            <p role="presentation">{{body["start"]}}</p>
+	     <label for="annotate-gps-form-ok">{{body["start"]}}</label>
+            
           </div>
 
           <div class="ui-block-b">
@@ -39,12 +40,17 @@
 	      <option value="30">{{body["rate-30"]}}</option>
 	      <option value="60">{{body["rate-60"]}}</option>
 	    </select>
-	    <p>{{body["rate-text"]}}</p>
+	    <label for="annotate-gps-form-rate">{{body["rate-text"]}}</label>
           </div>
 
           <div class="ui-block-c">
-            <div id="annotate-gps-colour-pick"></div>
-	    <p>{{body["colour"]}}</p>
+             <select id="annotate-gps-colour-pick">
+	      <option value="#FF0000" style="background-color: #FF0000">red</option>
+	      <option value="#0000FF" style="background-color: #0000FF">blue</option>
+	      <option value="#00FF00" style="background-color: #00FF00">green</option>
+	      
+	    </select>
+	     <label for="annotate-gps-colour-pick">Select colour for track</label>
           </div>
         </div>
 
