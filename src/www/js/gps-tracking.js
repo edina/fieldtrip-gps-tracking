@@ -47,18 +47,13 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
             localStorage.setItem(tracks.COLOUR_INDEX, 'red');
         }
 
-        
+        utils.appendDateTimeToInput("#annotate-gps-form-title");
 
-        
-        
-         $("#annotate-gps-colour-pick").change(function(color){
-            
-                var $index = $('#annotate-gps-colour-pick option:selected').val();
-                localStorage.setItem(tracks.COLOUR_INDEX, $index);
-            });
-         
-        
-        
+        $("#annotate-gps-colour-pick").change(function(color){
+            var $index = $('#annotate-gps-colour-pick option:selected').val();
+            localStorage.setItem(tracks.COLOUR_INDEX, $index);
+        });
+
         // listen on start button
         $('#annotate-gps-form-ok').click(function(event){
             $('#annotate-gps-form').submit();
