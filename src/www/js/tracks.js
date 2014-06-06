@@ -254,7 +254,7 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
 
                 var zoomLevel = updateZoomLevelForGspAccuracy(accuracyInMeters);
 
-                map.updateLocateLayer(zoomlevel);
+                map.updateLocateLayer(zoomLevel);
 
                 var point = new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat);
                 gpsTrackLayer.features[0].geometry.addPoint(point);
