@@ -38,6 +38,10 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
      * GPS capture form page.
      */
     var annotateGpsPage = function(){
+
+        // Hack: Clear whitespace between textarea added during generate_html step 
+        $('textarea').cleanWhitespace();
+
         var colour = "red";
         var defcolour = localStorage.getItem(tracks.COLOUR_INDEX);
         if(defcolour){
