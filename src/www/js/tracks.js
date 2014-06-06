@@ -145,24 +145,30 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
     };
     
     /**
-    * @returns recommended zoom level for gsp accuracy in meters 
-    * if accuracy is undefined then 
+    * @returns a function that will get the zoom level of map adjusted for gps accuracy.
+    * @param numberOfAttempts
     */
     var getZoomLevelForAccurancyFunction = function(numberOfAttempts){
     
-        var zoomLevelForAccurancy = function(accuracy){
-            console.log("number of attempts " + numberOfAttempts);
+        /**
+        * @param accuracy - the gps accurancy in meters
+        * @returns the zoomlevel for accuracy or undefined if numberOfAttempts has been reached.
+        */
+        var getZoomLevelForAccurancy = function(accuracy){
+       
             if(numberOfAttempts-- < 0){
-                return;
+       
+                return undefined;
             }
             var zoomlevel=16;     // Start zoomed in almost all the way
             if (accuracy > 80) {   // Zoom out for less accurate positions
                 zoomlevel -= Math.round(Math.log(accuracy/50)/Math.LN2);
             }
-            map.updateLocateLayer(zoomlevel);
-        }
+            return zoomlevel;
        
-        return zoomLevelForAccurancy;
+        }
+        return getZoomLevelForAccurancy;
+       
     }
     
 
@@ -246,11 +252,9 @@ define(['map', 'records', 'utils','config'], function(map, records, utils, confi
        
                 var accuracyInMeters = position.coords.accuracy;
 
-                updateZoomLevelForGspAccuracy(accuracyInMeters);
-       
-       
-       
-       
+                var zoomLevel = updateZoomLevelForGspAccuracy(accuracyInMeters);
+
+                map.updateLocateLayer(zoomlevel);
 
                 var point = new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat);
                 gpsTrackLayer.features[0].geometry.addPoint(point);
