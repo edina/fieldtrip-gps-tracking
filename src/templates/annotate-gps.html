@@ -18,12 +18,12 @@
 
         <div>
           <label for="annotate-gps-form-description">{{body["description"]}}</label>
-          <textarea id="annotate-gps-form-description" aria-flowto="annotate-gps-form-ok"></textarea>
+          <textarea id="annotate-gps-form-description" aria-flowto="annotate-gps-form-ok" tabindex=2></textarea>
         </div>
 
         <div class="ui-grid-b">
           <div class="ui-block-a">
-            <a href="#" id="annotate-gps-form-ok" role="button" aria-flowto="annotate-gps-form-rate" aria-label="Start recording a new track">
+            <a href="#" id="annotate-gps-form-ok" role="button" aria-flowto="annotate-gps-colour-pick" aria-label="Start recording a new track" tabindex=3>
 	      
               <img src="css/images/startgpscapture.png" alt="Icon for Start new GPS Track button" role="presentation"></img>
 	      
@@ -32,23 +32,12 @@
             
           </div>
 
-          <div class="ui-block-b">
-	    <select id="annotate-gps-form-rate">
-	      <option value="5">{{body["rate-5"]}}</option>
-	      <option value="10">{{body["rate-10"]}}</option>
-	      <option value="20">{{body["rate-20"]}}</option>
-	      <option value="30">{{body["rate-30"]}}</option>
-	      <option value="60">{{body["rate-60"]}}</option>
-	    </select>
-	    <label for="annotate-gps-form-rate">{{body["rate-text"]}}</label>
-          </div>
 
           <div class="ui-block-c">
-             <select id="annotate-gps-colour-pick">
+             <select id="annotate-gps-colour-pick" tabindex=4>
 	      <option value="#FF0000" style="background-color: #FF0000">red</option>
 	      <option value="#0000FF" style="background-color: #0000FF">blue</option>
-	      <option value="#00FF00" style="background-color: #00FF00">green</option>
-	      
+	      <option value="#00FF00" style="background-color: #00FF00">green</option
 	    </select>
 	     <label for="annotate-gps-colour-pick">Select colour for track</label>
           </div>
@@ -58,6 +47,5 @@
     </div>
   </div>
 
-  {{footer}}
 
 </div>
