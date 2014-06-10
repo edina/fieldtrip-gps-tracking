@@ -70,6 +70,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
                 utils.inform('Required field not populated');
             }
             else{
+                var value = $('#annotate-gps-form-rate').val();
                 currentGpsAnnotation = {
                     'record':{
                         'editor': 'track.edtr',
@@ -95,7 +96,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
                         ],
                     },
                     'isSynced': false,
-                    'rate': $('#annotate-gps-form-rate').val()
+                    'rate': (typeof(value)==='number') ? value : 5
                 };
 
                 utils.hideKeyboard();
