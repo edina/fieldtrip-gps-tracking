@@ -122,6 +122,8 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
      */
     var gpsCapturePage = function(){
         ui.mapPage('gpscapture-map');
+       
+        
 
         var changeToResume = function(){
             $("#gpscapture-pause-play .ui-btn-text").text('Resume');
@@ -190,6 +192,9 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
             
 
         }
+       
+        //start monitoring user position straight away
+        map.geoLocate({interval:5000});
 
         map.hideAnnotateLayer();
     };
