@@ -18,11 +18,11 @@
 
                 <div>
                     <label for="annotate-gps-form-description">{{body["description"]}}</label>
-                    <textarea id="annotate-gps-form-description" aria-flowto="annotate-gps-form-ok" tabindex=2></textarea>
+                    <textarea id="annotate-gps-form-description" autofocus aria-flowto="annotate-gps-colour-pick" tabindex=2></textarea>
                 </div>
 
                 <label for="annotate-gps-colour-pick"  aria-hidden="true">Select colour for track</label>
-                <select id="annotate-gps-colour-pick"  aria-label="Select colour for track" tabindex=3>
+                <select id="annotate-gps-colour-pick" aria-flowto="annotate-gps-form-ok" aria-label="Select colour for track" tabindex=3>
                     <option value="#FF0000">Red</option>
                     <option value="#0000FF">Blue</option>
                     <option value="#00FF00">Green</option>
