@@ -51,7 +51,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
             localStorage.setItem(tracks.COLOUR_INDEX, 'red');
         }
 
-        utils.appendDateTimeToInput("#annotate-gps-form-title");
+        $("#annotate-gps-form-title").append(utils.getSimpleDate());
 
         $("#annotate-gps-colour-pick").change(function(color){
             var $index = $('#annotate-gps-colour-pick option:selected').val();
@@ -65,9 +65,10 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
 
         // form submitted
         $('#annotate-gps-form').submit(function(event){
-            if($('#annotate-gps-form-title').val().length === 0){
-                $('#annotate-gps-form-title').addClass('ui-focus');
-                utils.inform('Required field not populated');
+            var description = $('#annotate-gps-form-description'); 
+            if(description.val().length === 0){
+                description.addClass('ui-focus');
+                utils.inform('Please enter a track description');
             }
             else{
                 var value = $('#annotate-gps-form-rate').val();

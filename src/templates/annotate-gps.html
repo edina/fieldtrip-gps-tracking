@@ -1,39 +1,27 @@
 <div id="annotate-gps-page" data-role="page" data-theme="b">
-
     {{header}}
-
     <div data-role="content">
         <div class="non-map-body-white ui-overlay-shadow">
             <form id="annotate-gps-form" data-ajax="false" accept-charset="utf-8">
                 <div>
-                    <label for="annotate-gps-form-title" >{{body["title"]}}</label>
+                    <p id="annotate-gps-form-title" tabindex=1 aria-flowto="annotate-gps-form-description">{{body["title"]}}:</p>
+                    <div>
+                        <label for="annotate-gps-form-description">{{body["description"]}}</label>
+                        <textarea id="annotate-gps-form-description" autofocus aria-flowto="annotate-gps-colour-pick" tabindex=2></textarea>
+                    </div>
 
-                    <input id="annotate-gps-form-title"
-                    type="text"
-                    value="track"
-                    required="true",
-                    maxlength="40" aria-flowto="annotate-gps-form-description" tabindex=1/>
-
-                </div>
-
-                <div>
-                    <label for="annotate-gps-form-description">{{body["description"]}}</label>
-                    <textarea id="annotate-gps-form-description" autofocus aria-flowto="annotate-gps-colour-pick" tabindex=2></textarea>
-                </div>
-
-                <label for="annotate-gps-colour-pick"  aria-hidden="true">Select colour for track</label>
-                <select id="annotate-gps-colour-pick" aria-flowto="annotate-gps-form-ok" aria-label="Select colour for track" tabindex=3>
-                    <option value="#FF0000">Red</option>
-                    <option value="#0000FF">Blue</option>
-                    <option value="#00FF00">Green</option>
-                </select>
-                <br />
-                <label for="annotate-gps-form-ok" id="annotate-gps-label" aria-hidden="true">{{body["start"]}}</label>
-                <a href="#" id="annotate-gps-form-ok" role="button" aria-label="Start recording a new track" tabindex=4>
-                    <img src="css/images/startgpscapture.png" alt="Icon for Start new GPS Track button" role="presentation"></img>
-                </a>
-
-            </form>
+                    <label for="annotate-gps-colour-pick">Select colour for track</label>
+                    <select id="annotate-gps-colour-pick" aria-flowto="annotate-gps-form-ok" tabindex=3>
+                        <option value="#FF0000">Red</option>
+                        <option value="#0000FF">Blue</option>
+                        <option value="#00FF00">Green</option>
+                    </select>
+                    <br />
+                    <label for="annotate-gps-form-ok" id="annotate-gps-label" aria-hidden="true">{{body["start"]}}</label>
+                    <a href="#" id="annotate-gps-form-ok" role="button" aria-label="Start recording a new track" tabindex=4>
+                        <img src="css/images/startgpscapture.png" alt="Icon for Start new GPS Track button" role="presentation"></img>
+                    </a>
+                </form>
+            </div>
         </div>
     </div>
-</div>
