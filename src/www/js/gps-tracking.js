@@ -51,7 +51,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
             localStorage.setItem(tracks.COLOUR_INDEX, 'red');
         }
 
-        $("#annotate-gps-form-title").append(utils.getSimpleDate());
+        $("#annotate-gps-form-title").append("Track " + utils.getSimpleDate());
 
         $("#annotate-gps-colour-pick").change(function(color){
             var $index = $('#annotate-gps-colour-pick option:selected').val();
