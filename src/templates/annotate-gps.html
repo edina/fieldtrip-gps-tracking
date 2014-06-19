@@ -4,21 +4,23 @@
         <div class="non-map-body-white ui-overlay-shadow">
             <form id="annotate-gps-form" data-ajax="false" accept-charset="utf-8">
                 <div>
-                    <p id="annotate-gps-form-title" tabindex=1 aria-flowto="annotate-gps-form-description">{{body["title"]}}:</p>
+                    <p tabindex=1 aria-flowto="annotate-gps-form-title">{{body["title"]}}:</p>
+                    <p id="annotate-gps-form-title" tabindex=2 aria-flowto="annotate-gps-form-description"></p>
+                    <br /><br />
                     <div>
                         <label for="annotate-gps-form-description">{{body["description"]}}</label>
-                        <textarea id="annotate-gps-form-description" autofocus aria-flowto="annotate-gps-colour-pick" tabindex=2></textarea>
+                        <textarea id="annotate-gps-form-description" autofocus aria-flowto="annotate-gps-colour-pick" tabindex=3></textarea>
                     </div>
 
                     <label for="annotate-gps-colour-pick">Select colour for track</label>
-                    <select id="annotate-gps-colour-pick" aria-flowto="annotate-gps-form-ok" tabindex=3>
+                    <select id="annotate-gps-colour-pick" aria-flowto="annotate-gps-form-ok" tabindex=4>
                         <option value="#FF0000">Red</option>
                         <option value="#0000FF">Blue</option>
                         <option value="#00FF00">Green</option>
                     </select>
                     <br />
                     <label for="annotate-gps-form-ok" id="annotate-gps-label" aria-hidden="true">{{body["start"]}}</label>
-                    <a href="#" id="annotate-gps-form-ok" role="button" aria-label="Start recording a new track" tabindex=4>
+                    <a href="#" id="annotate-gps-form-ok" role="button" aria-label="Start recording a new track" tabindex=5>
                         <img src="css/images/startgpscapture.png" alt="Icon for Start new GPS Track button" role="presentation"></img>
                     </a>
                 </form>
