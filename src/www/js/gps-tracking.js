@@ -42,14 +42,8 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
         // Hack: Clear whitespace between textarea added during generate_html step 
         $('textarea').cleanWhitespace();
 
-        var colour = "red";
-        var defcolour = localStorage.getItem(tracks.COLOUR_INDEX);
-        if(defcolour){
-            colour = defcolour;
-        }
-        else{
-            localStorage.setItem(tracks.COLOUR_INDEX, 'red');
-        }
+        // Set default track colour
+        localStorage.setItem(tracks.COLOUR_INDEX, 'red');
 
         $("#annotate-gps-form-title").append("Track " + utils.getSimpleDate());
 
