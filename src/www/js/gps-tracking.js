@@ -69,7 +69,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
                 currentGpsAnnotation = {
                     'record':{
                         'editor': 'track.edtr',
-                        'name': $('#annotate-gps-form-title').text(),
+                        'name': $('#annotate-gps-form-title').text().trim(),
                         'fields': [
                             {
                                 'id': 'fieldcontain-textarea-1',
