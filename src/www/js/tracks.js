@@ -33,8 +33,8 @@ DAMAGE.
 
 /* global XMLSerializer, OpenLayers */
 
-define(['map', 'records', 'utils','config'], function(// jshint ignore:line
-    map, records, utils, config){
+define(['map', 'records', 'utils','config', 'file'], function(// jshint ignore:line
+    map, records, utils, config, file){
     var GPS_ACCURACY = 50;
     var GPS_AUTO_SAVE_THRESHOLD = 5;
     var GPS_ACCURACY_FLAG = false;
@@ -357,7 +357,7 @@ var _this = {
             var assetsDir = records.getAssetsDir();
 
             if(assetsDir){
-                fullName = utils.getFilePath(assetsDir) + '/' + fileName;
+                fullName = file.getFilePath(assetsDir) + '/' + fileName;
             }
 
             // initialise record point with user's current location
