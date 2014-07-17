@@ -72,12 +72,6 @@ define(['map', 'records', 'utils','config', 'file'], function(// jshint ignore:l
         return isTrack;
     });
 
-    // listen for hide records event
-    $(document).on(map.EVT_HIDE_RECORDS, function(evt){
-        console.log("crivvens");
-        map.hideLayer(gpsTrackLayer);
-    });
-
     /**
      * Save current GPS position to GPX doc. Periodically auto save the doc to file.
      * @param position Contains position coordinates and timestamp, created by the

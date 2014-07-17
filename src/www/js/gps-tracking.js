@@ -250,4 +250,9 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
         }
     );
 
+    // listen for hide records event
+    $(document).on(map.EVT_HIDE_RECORDS, function(evt){
+        map.hideLayerByName('gps-track-');
+    });
+
 });
