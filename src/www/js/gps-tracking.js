@@ -187,9 +187,14 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
             
 
         }
+
        
         //start monitoring user position straight away
-        map.geoLocate({interval:5000});
+        if (settings.get('autopan-map') === 'on'){
+            map.geoLocate({interval:5000});
+        } else {
+            map.geoLocate({interval:0});
+        }
 
         map.hideAnnotateLayer();
     };
