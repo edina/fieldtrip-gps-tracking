@@ -72,6 +72,12 @@ define(['map', 'records', 'utils','config', 'file'], function(// jshint ignore:l
         return isTrack;
     });
 
+
+    // Suscribe to the map notification for doing some tear down tasks.
+    map.on(map.EVT_BEFORE_EXIT,function(){
+        _this.gpsCaptureComplete();
+    });
+
     /**
      * Save current GPS position to GPX doc. Periodically auto save the doc to file.
      * @param position Contains position coordinates and timestamp, created by the
