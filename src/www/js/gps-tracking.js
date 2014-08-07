@@ -206,14 +206,14 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
     $('head').prepend('<link rel="stylesheet" href="plugins/gps-tracking/css/style.css" type="text/css" />');
 
     // initial annotate page form
-    $(document).on('pageinit', '#annotate-gps-page', annotateGpsPage);
+    $(document).on('pagecreate', '#annotate-gps-page', annotateGpsPage);
 
     // the page that the track runs on
-    $(document).on('pageinit', '#gpscapture-page', gpsCapturePage);
+    $(document).on('pagecreate', '#gpscapture-page', gpsCapturePage);
 
     // Check if annotation popup should be shown automatically
     $(document).on(
-        'pageshow',
+        'pagecontainershow',
         '#gpscapture-page',
         function(){
             map.updateSize();
@@ -222,7 +222,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
 
     // show / hide gps track running icon
     $(document).on(
-        'pagebeforeshow',
+        'pagecontainerbeforeshow',
         'div[data-role="page"]',
         function(event){
             if(tracks.gpsTrackStarted()){
