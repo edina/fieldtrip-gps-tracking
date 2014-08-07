@@ -1,4 +1,4 @@
-<div id="gpscapture-page" class="map-page" data-role="page" data-theme="a">
+<div id="gpscapture-page" class="map-page" data-role="page" data-theme="b">
 
   {{header}}
 
@@ -16,7 +16,7 @@
   </div>
   {% endif %}
 
-  <div data-role="content">
+  <div class="ui-content">
 
     <div id="gpscapture-map" class="map"></div>
 
@@ -27,15 +27,10 @@
 
     <div id="gpscapture-confirm-popup" data-role="popup">
       <p>Are you sure you want to save the track?</p>
-      <div class="gsp-track-dialog-buttons" >
+      <div class="gsp-track-dialog-buttons">
         <a id="gpscapture-confirm-save" data-role="button" href="#">Save</a>
-        <a id="gpscapture-confirm-cancel"
-           data-rel="back"
-           data-role="button"
-           href="#">Back</a>
-        <a id="gpscapture-confirm-discard"
-           data-role="button"
-           href="#">Discard</a>
+        <a id="gpscapture-confirm-cancel" data-rel="back" data-role="button" href="#">Back</a>
+        <a id="gpscapture-confirm-discard" data-role="button" href="#">Discard</a>
       </div>
     </div>
   </div>

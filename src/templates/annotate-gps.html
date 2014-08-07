@@ -2,16 +2,12 @@
 
   {{header}}
 
-  <div data-role="content">
+  <div class="ui-content">
     <div class="non-map-body-white ui-overlay-shadow">
       <form id="annotate-gps-form" data-ajax="false" accept-charset="utf-8">
         <div>
           <label for="annotate-gps-form-title">{{body["title"]}}</label>
-          <input id="annotate-gps-form-title"
-                 type="text"
-                 value="track"
-                 required="true",
-                 maxlength="40">
+          <input id="annotate-gps-form-title" type="text" value="track" required="true" maxlength="40">
         </div>
 
         <div>
@@ -22,7 +18,7 @@
         <div class="ui-grid-b">
           <div class="ui-block-a">
             <a href="#" id="annotate-gps-form-ok">
-              <img src="css/images/startgpscapture.png" alt="Start GPS"></img>
+              <img src="css/images/startgpscapture.png" alt="Start GPS">
             </a>
             <p>{{body["start"]}}</p>
           </div>
