@@ -211,28 +211,19 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
     // the page that the track runs on
     $(document).on('pagecreate', '#gpscapture-page', gpsCapturePage);
 
-    // Check if annotation popup should be shown automatically
-    $(document).on(
-        'pagecontainershow',
-        '#gpscapture-page',
-        function(){
-            map.updateSize();
-        }
-    );
-
     // show / hide gps track running icon
-    $(document).on(
-        'pagecontainerbeforeshow',
-        'div[data-role="page"]',
-        function(event){
-            if(tracks.gpsTrackStarted()){
-                $('.gpstrack-running').show();
-            }
-            else{
-                $('.gpstrack-running').hide();
-            }
+    $(document).on('pagecontainerbeforeshow', function(event, ui){
+        if(tracks.gpsTrackStarted()){
+            $('.gpstrack-running').show();
         }
-    );
+        else{
+            $('.gpstrack-running').hide();
+        }
+    });
+
+    $(document).on('pageshow', '#gpscapture-page', function(){
+        map.updateSize();
+    });
 
     // click on gps capture running icon
     $(document).on(
