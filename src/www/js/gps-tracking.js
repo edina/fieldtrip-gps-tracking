@@ -221,7 +221,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
         }
     });
 
-    $(document).on('pageshow', '#gpscapture-page', function(){
+    $(document).on('_pageshow', '#gpscapture-page', function(){
         map.updateSize();
     });
 

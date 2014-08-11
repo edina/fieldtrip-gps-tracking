@@ -4,6 +4,7 @@
             "item1": {
                 "a": {
                     "id": "gpscapture-stop-button",
+                    "class": "gpscapture-control",
                     "href": "#gpscapture-confirm-popup",
                     "data-icon": "custom",
                     "data-rel": "popup",
@@ -14,6 +15,7 @@
             "item2": {
                 "a": {
                     "id": "gpscapture-pause-play",
+                    "class": "gpscapture-control",
                     "data-icon": "custom"
                 },
                 "value": "Pause"
@@ -21,6 +23,7 @@
             "item3": {
                 "a": {
                     "id": "gpscapture-toggle-route",
+                    "class": "gpscapture-control",
                     "data-icon": "custom"
                 },
                 "value": "Show/Hide Route"

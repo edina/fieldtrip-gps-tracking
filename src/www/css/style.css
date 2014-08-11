@@ -4,24 +4,36 @@
     background-color: red !important;
 }
 
-#gpscapture-stop-button .ui-icon{
+.gpscapture-control.ui-icon-custom:after{
+    border-radius: 0 !important;
+    background-size: 20px 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.gpscapture-control.ui-icon-custom:after{
+    margin-left: -10px;
+    margin-top: 0;
+}
+
+#gpscapture-stop-button:after{
     background: url("images/stop.png") 50% 50% no-repeat;
-    background-size: 20px 20px;
 }
 
-#gpscapture-pause-play .ui-icon{
+#gpscapture-pause-play:after{
     background: url("images/pause.png") 50% 50% no-repeat;
-    background-size: 20px 20px;
 }
 
-#gpscapture-toggle-route .ui-icon{
+#gpscapture-toggle-route:after{
     background: url("images/route.png") 50% 50% no-repeat;
     background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
+    margin-left: -15px;
 }
 
-#gpscapture-play .ui-icon{
+#gpscapture-play:after{
     background: url("images/play.png") 50% 50% no-repeat;
-    background-size: 20px 20px;
 }
 
 #annotate-gps-form{
