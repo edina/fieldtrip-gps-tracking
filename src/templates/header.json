@@ -1,13 +1,5 @@
 {
     "buttons" : {
-        "user-locate":{
-            "class": "user-locate",
-            "data-role": "button",
-            "data-inline": "true",
-            "data-transition": "none",
-            "data-iconpos": "notext",
-            "style": "display: none"
-        },
         "gps-running":{
             "class": "gpstrack-running",
             "data-role": "button",
