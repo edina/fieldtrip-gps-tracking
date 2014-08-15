@@ -111,7 +111,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
 
                 // kick off capture
                 tracks.gpsTrack(currentGpsAnnotation, debugGPS());
-                $.mobile.changePage('gps-capture.html');
+                $('body').pagecontainer('change', 'gps-capture.html');
             }
 
             return false;
@@ -140,7 +140,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
         var gotoPage = function(page){
             if(typeof(config.leaveaftergpssavediscard) === 'undefined' ||
                utils.str2bool(config.gotomapaftergpssave)){
-                $.mobile.changePage(page);
+                $('body').pagecontainer('change', page);
             }
         };
 
@@ -233,7 +233,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
             // timout hack prevents the clicking on the button on the
             // same position on the next page
             setTimeout(function(){
-                $.mobile.changePage('gps-capture.html');
+                $('body').pagecontainer('change', 'gps-capture.html');
                 event.stopPropagation();
             }, 400);
 
