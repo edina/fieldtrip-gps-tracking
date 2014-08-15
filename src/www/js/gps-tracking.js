@@ -222,7 +222,12 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
     });
 
     $(document).on('_pageshow', '#gpscapture-page', function(){
+        map.startLocationUpdate();
         map.updateSize();
+    });
+
+    $(document).on('pageremove', '#gpscapture-page', function(){
+        map.stopLocationUpdate();
     });
 
     // click on gps capture running icon
