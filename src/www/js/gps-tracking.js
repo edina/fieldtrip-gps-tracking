@@ -223,11 +223,13 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
 
     $(document).on('_pageshow', '#gpscapture-page', function(){
         map.startLocationUpdate();
+        map.initCompass();
         map.updateSize();
     });
 
     $(document).on('pageremove', '#gpscapture-page', function(){
         map.stopLocationUpdate();
+        map.stopCompass();
     });
 
     // click on gps capture running icon
