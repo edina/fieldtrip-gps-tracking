@@ -130,7 +130,7 @@ define(['map', 'records', 'utils','config', 'file'], function(// jshint ignore:l
                             };
                             writer.write(sXML);
 
-                            if(callback){
+                            if(typeof callback === 'function'){
                                 callback();
                             }
                         },
@@ -278,8 +278,8 @@ define(['map', 'records', 'utils','config', 'file'], function(// jshint ignore:l
                 onError,
                 {
                     enableHighAccuracy: map.GPS_ACCURACY_FLAG,
-                    maximumAge: interval,
-                    timeout: 30000,
+                    maximumAge: map.GPS_LOCATE_TTL,
+                    timeout: map.GPS_LOCATE_TIMEOUT,
                 }
             );
         }
