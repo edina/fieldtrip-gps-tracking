@@ -31,8 +31,8 @@ DAMAGE.
 
 "use strict";
 
-define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], function(// jshint ignore:line
-    ui, records,  map, utils, settings, config, tracks){
+define(['ui', 'records', 'map', 'file', 'utils', 'settings', 'config', './tracks'], function(// jshint ignore:line
+    ui, records,  map, file, utils, settings, config, tracks){
     var currentGpsAnnotation;
 
     /**
@@ -123,6 +123,31 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
      */
     var debugGPS = function(){
         return settings.get('debug-gps') === 'on';
+    };
+
+    /**
+     * Delete GPX file from device.
+     * @param e
+     * @param annotation FT annotation.
+     */
+    var deleteGPXFile = function(e, annotation){
+        var type = records.getEditorId(annotation);
+        if(type === 'track'){
+            $.each(annotation.record.fields, function(i, field){
+                if(field.id === 'fieldcontain-track-1'){
+                    var gpxFile = field.val;
+                    file.deleteFile(
+                        gpxFile.substr(gpxFile.lastIndexOf('/') + 1),
+                        records.getAssetsDir(),
+                        function(){
+                            console.debug("GPX file deleted: " + gpxFile);
+                        }
+                    );
+
+                    return;
+                }
+            });
+        }
     };
 
     /**
@@ -249,8 +274,13 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
     );
 
     // listen for hide records event
-    $(document).on(map.EVT_HIDE_RECORDS, function(evt){
+    $(document).on(map.EVT_HIDE_RECORDS, function(){
         map.hideLayerByName('gps-track-');
     });
 
+    // listen for delete annotation event
+    $(document).on(records.EVT_DELETE_ANNOTATION, deleteGPXFile);
+
+    // add new asset type to fieldtrip
+    records.addAssetType('track');
 });
