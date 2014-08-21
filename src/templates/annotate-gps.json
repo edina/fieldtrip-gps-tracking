@@ -4,6 +4,7 @@
         "description": "Description",
         "start": "Start",
         "rate-text": "Capture Rate",
+        "rate-0": "Use internal rate",
         "rate-5": "5 seconds",
         "rate-10": "10 seconds",
         "rate-20": "20 seconds",
