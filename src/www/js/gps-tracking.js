@@ -31,8 +31,8 @@ DAMAGE.
 
 "use strict";
 
-define(['ui', 'records', 'map', 'file', 'utils', 'settings', 'config', './tracks'], function(// jshint ignore:line
-    ui, records,  map, file, utils, settings, config, tracks){
+define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], function(// jshint ignore:line
+    ui, records,  map, file, utils, settings, tracks){
     var currentGpsAnnotation;
 
     /**
@@ -154,6 +154,7 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', 'config', './tracks
      * Initialise GPS capture page.
      */
     var gpsCapturePage = function(){
+        var config = utils.getConfig();
         ui.mapPage('gpscapture-map');
 
         var changeToResume = function(){
@@ -163,9 +164,11 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', 'config', './tracks
         };
 
         var gotoPage = function(page){
-            if(typeof(config.leaveaftergpssavediscard) === 'undefined' ||
-               utils.str2bool(config.gotomapaftergpssave)){
-                $('body').pagecontainer('change', page);
+            if(utils.str2bool(config.gotomapaftergpssave)){
+                utils.changePage(page);
+            }
+            else{
+                $('#gpscapture-confirm-popup').popup('close');
             }
         };
 
@@ -216,7 +219,7 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', 'config', './tracks
             gotoPage('index.html');
         });
 
-        if(config.showRecordsOnGpsTrackingPage){
+        if(config.showrrecordsongpstrackingpage){
             map.showRecordsLayer();
         }
 
