@@ -250,8 +250,8 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
     });
 
     $(document).on('_pageshow', '#gpscapture-page', function(){
-        map.startLocationUpdate();
-        map.initCompass();
+        map.startLocationUpdate({autopan: 'soft'});
+        map.startCompass();
         map.updateSize();
     });
 
