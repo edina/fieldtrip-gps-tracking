@@ -31,8 +31,8 @@ DAMAGE.
 
 "use strict";
 
-define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], function(// jshint ignore:line
-    ui, records,  map, utils, settings, config, tracks){
+define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], function(// jshint ignore:line
+    ui, records,  map, file, utils, settings, tracks){
     var currentGpsAnnotation;
 
     /**
@@ -126,9 +126,35 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
     };
 
     /**
+     * Delete GPX file from device.
+     * @param e
+     * @param annotation FT annotation.
+     */
+    var deleteGPXFile = function(e, annotation){
+        var type = records.getEditorId(annotation);
+        if(type === 'track'){
+            $.each(annotation.record.fields, function(i, field){
+                if(field.id === 'fieldcontain-track-1'){
+                    var gpxFile = field.val;
+                    file.deleteFile(
+                        gpxFile.substr(gpxFile.lastIndexOf('/') + 1),
+                        records.getAssetsDir(),
+                        function(){
+                            console.debug("GPX file deleted: " + gpxFile);
+                        }
+                    );
+
+                    return;
+                }
+            });
+        }
+    };
+
+    /**
      * Initialise GPS capture page.
      */
     var gpsCapturePage = function(){
+        var config = utils.getConfig();
         ui.mapPage('gpscapture-map');
 
         var changeToResume = function(){
@@ -138,9 +164,11 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
         };
 
         var gotoPage = function(page){
-            if(typeof(config.leaveaftergpssavediscard) === 'undefined' ||
-               utils.str2bool(config.gotomapaftergpssave)){
-                $('body').pagecontainer('change', page);
+            if(utils.str2bool(config.gotomapaftergpssave)){
+                utils.changePage(page);
+            }
+            else{
+                $('#gpscapture-confirm-popup').popup('close');
             }
         };
 
@@ -191,7 +219,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
             gotoPage('index.html');
         });
 
-        if(config.showRecordsOnGpsTrackingPage){
+        if(config.showrrecordsongpstrackingpage){
             map.showRecordsLayer();
         }
 
@@ -249,8 +277,13 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
     );
 
     // listen for hide records event
-    $(document).on(map.EVT_HIDE_RECORDS, function(evt){
+    $(document).on(map.EVT_HIDE_RECORDS, function(){
         map.hideLayerByName('gps-track-');
     });
 
+    // listen for delete annotation event
+    $(document).on(records.EVT_DELETE_ANNOTATION, deleteGPXFile);
+
+    // add new asset type to fieldtrip
+    records.addAssetType('track');
 });

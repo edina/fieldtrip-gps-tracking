@@ -33,8 +33,8 @@ DAMAGE.
 
 /* global XMLSerializer, OpenLayers */
 
-define(['map', 'records', 'utils','config', 'file'], function(// jshint ignore:line
-    map, records, utils, config, file){
+define(['map', 'records', 'utils', 'file'], function(// jshint ignore:line
+    map, records, utils, file){
     var GPS_ACCURACY = 50;
     var GPS_AUTO_SAVE_THRESHOLD = 5;
     var GPS_ACCURACY_FLAG = false;
