@@ -223,7 +223,7 @@ define(['ui', 'records', 'map', 'utils', 'settings', 'config', './tracks'], func
 
     $(document).on('_pageshow', '#gpscapture-page', function(){
         map.startLocationUpdate();
-        map.initCompass();
+        map.startCompass();
         map.updateSize();
     });
 
