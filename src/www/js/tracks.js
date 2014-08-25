@@ -363,7 +363,7 @@ var _this = {
             var assetsDir = records.getAssetsDir();
 
             if(assetsDir){
-                fullName = file.getFilePath(assetsDir) + '/' + fileName;
+                fullName = file.getFilePath(assetsDir) + fileName;
             }
 
             // initialise record point with user's current location
