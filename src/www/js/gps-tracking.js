@@ -34,6 +34,7 @@ DAMAGE.
 define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], function(// jshint ignore:line
     ui, records,  map, file, utils, settings, tracks){
     var currentGpsAnnotation;
+    var DEFAULT_CAPTURE_RATE = 0;
 
     /**
      * GPS capture form page.
@@ -104,7 +105,7 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
                         ],
                     },
                     'isSynced': false,
-                    'rate': $('#annotate-gps-form-rate').val()
+                    'rate': DEFAULT_CAPTURE_RATE
                 };
 
                 utils.hideKeyboard();
