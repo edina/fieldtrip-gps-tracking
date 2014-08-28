@@ -155,10 +155,10 @@ define(['map', 'records', 'utils','config', 'file'], function(// jshint ignore:l
         if(track !== undefined){
             var features = track.geometry.components;
             if(features.length > 0){
-                coords = {
-                    'lon': features[0].x,
-                    'lat': features[0].y,
-                };
+                coords = [
+                    features[0].x,
+                    features[0].y,
+                ];
             }
             else{
                 console.debug("No components in geometry");
@@ -318,7 +318,7 @@ define(['map', 'records', 'utils','config', 'file'], function(// jshint ignore:l
         // TODO:
         // track URL found in the second element of the fields array in the
         // record, this may not always be the case
-        var trackField = track.record.fields[1];
+        var trackField = track.record.properties.fields[1];
 
         var colour = 'red';
         if(typeof(trackField.style) !== 'undefined'){
@@ -368,13 +368,13 @@ var _this = {
 
             // initialise record point with user's current location
             var start = map.getUserCoords();
-            annotation.record.point = {
-                'lon': start.lon,
-                'lat': start.lat,
-                'alt': start.gpsPosition.altitude
-            };
+            annotation.record.geometry.coordinates = [
+                start.lon,
+                start.lat,
+                start.gpsPosition.altitude
+            ];
 
-            annotation.record.fields[1].val = fullName;
+            annotation.record.properties.fields[1].val = fullName;
             var id = records.saveAnnotation(undefined, annotation);
 
             // create XML doc first using jquery's parseXML function,
@@ -421,7 +421,7 @@ var _this = {
             var startPoint = getGpsTrackStart();
 
             if(startPoint !== undefined){
-                annotation.record.point = startPoint;
+                annotation.record.geometry.coordinates = startPoint;
                 // save the annotation to local storage
                 records.saveAnnotation(this.currentTrack.id, annotation);
 

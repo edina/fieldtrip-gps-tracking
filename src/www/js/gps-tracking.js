@@ -79,11 +79,9 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', 'config', './tracks
                 utils.inform('Required field not populated');
             }
             else{
-                currentGpsAnnotation = {
-                    'record':{
-                        'editor': 'track.edtr',
-                        'name': $('#annotate-gps-form-title').val(),
-                        'fields': [
+                currentGpsAnnotation = records.createRecord('track');
+                currentGpsAnnotation.record.name = $('#annotate-gps-form-title').val();
+                currentGpsAnnotation.record.fields = [
                             {
                                 'id': 'fieldcontain-textarea-1',
                                 'val': $('#annotate-gps-form-description').val(),
@@ -101,11 +99,8 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', 'config', './tracks
                                     strokeOpacity: 1
                                 }
                             }
-                        ],
-                    },
-                    'isSynced': false,
-                    'rate': $('#annotate-gps-form-rate').val()
-                };
+                        ];
+                currentGpsAnnotation.rate = $('#annotate-gps-form-rate').val();
 
                 utils.hideKeyboard();
 
@@ -133,7 +128,7 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', 'config', './tracks
     var deleteGPXFile = function(e, annotation){
         var type = records.getEditorId(annotation);
         if(type === 'track'){
-            $.each(annotation.record.fields, function(i, field){
+            $.each(annotation.record.properties.fields, function(i, field){
                 if(field.id === 'fieldcontain-track-1'){
                     var gpxFile = field.val;
                     file.deleteFile(
