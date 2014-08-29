@@ -304,8 +304,9 @@ define(['map', 'records', 'utils', 'file'], function(// jshint ignore:line
      * Display a single GPS Track.
      * @param id Annotation id.
      * @param track Annotation object.
+     * @param callback Function executed when track has been displayed.
      */
-    var showGPSTrack = function(id, track){
+    var showGPSTrack = function(id, track, callback){
         // prepend layer name with gps-track
         var name = "gps-track-" + id;
         var layer = map.getLayer(name);
@@ -339,6 +340,9 @@ define(['map', 'records', 'utils', 'file'], function(// jshint ignore:line
             var extent = gpxLayer.getDataExtent();
             if(extent !== null){
                 map.zoomToExtent(extent);
+                if(callback){
+                    callback();
+                }
             }
         });
     };
@@ -411,8 +415,9 @@ var _this = {
 
     /**
      * Complete current GPS capture.
+     * @param callback Function executed when capture is complete.
      */
-    gpsCaptureComplete: function(){
+    gpsCaptureComplete: function(callback){
         if(typeof(this.currentTrack) !== 'undefined'){
             var annotation = records.getSavedRecord(this.currentTrack.id);
             this.gpsTrackPause();
@@ -433,7 +438,7 @@ var _this = {
                     map.getRecordsLayer().removeAllFeatures();
 
                     // display saved track on map
-                    showGPSTrack(id, annotation);
+                    showGPSTrack(id, annotation, callback);
                 });
             }
             else{
