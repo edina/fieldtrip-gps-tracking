@@ -82,7 +82,7 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
             else{
                 currentGpsAnnotation = records.createRecord('track');
                 currentGpsAnnotation.record.name = $('#annotate-gps-form-title').val();
-                currentGpsAnnotation.record.fields = [
+                currentGpsAnnotation.record.properties.fields = [
                             {
                                 'id': 'fieldcontain-textarea-1',
                                 'val': $('#annotate-gps-form-description').val(),
@@ -101,7 +101,7 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
                                 }
                             }
                         ];
-                currentGpsAnnotation.rate = $('#annotate-gps-form-rate').val();
+                currentGpsAnnotation.rate = DEFAULT_CAPTURE_RATE;
 
                 utils.hideKeyboard();
 
