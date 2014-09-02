@@ -175,8 +175,10 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
         // save GPS route
         $('#gpscapture-confirm-save').click(function(){
             currentGpsAnnotation = undefined;
-            tracks.gpsCaptureComplete();
-            gotoPage('map.html');
+            tracks.gpsCaptureComplete(function(){
+                map.showRecordsLayer();
+                gotoPage('map.html');
+            });
         });
 
         // cancel GPS route save
