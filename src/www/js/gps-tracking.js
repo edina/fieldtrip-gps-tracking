@@ -101,6 +101,7 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
                                 }
                             }
                         ];
+                currentGpsAnnotation.isSynced = false;
                 currentGpsAnnotation.rate = DEFAULT_CAPTURE_RATE;
 
                 utils.hideKeyboard();
