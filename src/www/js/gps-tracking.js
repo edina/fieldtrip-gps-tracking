@@ -49,10 +49,6 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
             localStorage.setItem(tracks.COLOUR_INDEX, 'red');
         }
 
-        // we need to add colour picker input dynamically otherwise
-        // JQM will attempt to format the input element
-        $('#annotate-gps-colour-pick').append('<input id="annotate-gps-colour-pick-input" type="color" name="color" />');
-
         utils.appendDateTimeToInput("#annotate-gps-form-title");
 
         $("#annotate-gps-colour-pick-input").spectrum({
