@@ -245,9 +245,13 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
     // show / hide gps track running icon
     $(document).on('pagecontainerbeforeshow', function(event, ui){
         if(tracks.gpsTrackStarted()){
+            $('#home-page .gps-track-start').attr('href', 'gps-capture.html');
+            $('#capture-page .gps-track-start').attr('href', 'gps-capture.html');
             $('.gpstrack-running').show();
         }
         else{
+            $('#home-page .gps-track-start').attr('href', 'annotate-gps.html');
+            $('#capture-page .gps-track-start').attr('href', 'annotate-gps.html');
             $('.gpstrack-running').hide();
         }
     });
