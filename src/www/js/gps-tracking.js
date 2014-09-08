@@ -261,20 +261,10 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
     });
 
     // click on gps capture running icon
-    $(document).on(
-        'vmousedown',
-        '.gpstrack-running',
-        function(event){
-            // timout hack prevents the clicking on the button on the
-            // same position on the next page
-            setTimeout(function(){
-                $('body').pagecontainer('change', 'gps-capture.html');
-                event.stopPropagation();
-            }, 400);
-
-            return false;
-        }
-    );
+    $(document).on('vclick', '.gpstrack-running', function(event){
+        event.preventDefault();
+        $('body').pagecontainer('change', 'gps-capture.html');
+    });
 
     // listen for hide records event
     $(document).on(map.EVT_HIDE_RECORDS, function(){
