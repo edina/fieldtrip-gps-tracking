@@ -26,7 +26,7 @@
             "item2": {
                 "a": {
                     "id": "gpscapture-pause-play",
-                    "class": "gpscapture-control",
+                    "class": "gpscapture-control pause",
                     "data-icon": "custom"
                 },
                 "value": "Pause"

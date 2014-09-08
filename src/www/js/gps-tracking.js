@@ -155,9 +155,9 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
         ui.mapPage('gpscapture-map');
 
         var changeToResume = function(){
-            $("#gpscapture-pause-play .ui-btn-text").text('Resume');
-            $("#gpscapture-pause-play .ui-icon").css('background-image',
-                                                     'url("css/images/play.png")');
+            $("#gpscapture-pause-play").text('Resume');
+            $("#gpscapture-pause-play").removeClass('pause')
+                                       .addClass('play');
         };
 
         var gotoPage = function(page){
@@ -189,16 +189,15 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
 
         // pause/resume GPS track button
         $('#gpscapture-pause-play').click(function(){
-            if($("#gpscapture-pause-play").text().trim() === 'Pause'){
+            if($("#gpscapture-pause-play").hasClass('pause')){
                 tracks.gpsTrackPause();
                 changeToResume();
             }
             else{
                 tracks.gpsTrackPlay(currentGpsAnnotation.rate, debugGPS());
-                $("#gpscapture-pause-play .ui-btn-text").text('Pause');
-                $("#gpscapture-pause-play .ui-icon").css(
-                    'background-image',
-                    'url("plugins/gps-tracking/css/images/pause.png")');
+                $("#gpscapture-pause-play").text('Pause');
+                $("#gpscapture-pause-play").removeClass('play')
+                                           .addClass('pause');
             }
 
             $('#gpscapture-pause-play').removeClass('ui-btn-active');

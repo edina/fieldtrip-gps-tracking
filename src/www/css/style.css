@@ -20,7 +20,7 @@
     background: url("images/stop.png") 50% 50% no-repeat;
 }
 
-#gpscapture-pause-play:after{
+#gpscapture-pause-play.pause:after{
     background: url("images/pause.png") 50% 50% no-repeat;
 }
 
@@ -32,7 +32,7 @@
     margin-left: -15px;
 }
 
-#gpscapture-play:after{
+#gpscapture-pause-play.play:after{
     background: url("images/play.png") 50% 50% no-repeat;
 }
 
