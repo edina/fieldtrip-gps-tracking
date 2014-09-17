@@ -250,9 +250,7 @@ define(['map', 'records', 'utils', 'file'], function(// jshint ignore:line
             var points = gpsTrackLayer.features[0].geometry.components;
             if(points.length > 0){
                 // use last records point
-                var coords = points[points.length - 1].clone().transform(
-                    map.INTERNAL_PROJECTION, // from national grid
-                    map.EXTERNAL_PROJECTION); // to WGS 1984
+                var coords = map.toExternal(points[points.length - 1]);
 
                 lon = coords.x;
                 lat = coords.y;

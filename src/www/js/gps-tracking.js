@@ -49,10 +49,6 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
             localStorage.setItem(tracks.COLOUR_INDEX, 'red');
         }
 
-        // we need to add colour picker input dynamically otherwise
-        // JQM will attempt to format the input element
-        $('#annotate-gps-colour-pick').append('<input id="annotate-gps-colour-pick-input" type="color" name="color" />');
-
         utils.appendDateTimeToInput("#annotate-gps-form-title");
 
         $("#annotate-gps-colour-pick-input").spectrum({
@@ -155,9 +151,9 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
         ui.mapPage('gpscapture-map');
 
         var changeToResume = function(){
-            $("#gpscapture-pause-play .ui-btn-text").text('Resume');
-            $("#gpscapture-pause-play .ui-icon").css('background-image',
-                                                     'url("css/images/play.png")');
+            $("#gpscapture-pause-play").text('Resume');
+            $("#gpscapture-pause-play").removeClass('pause')
+                                       .addClass('play');
         };
 
         var gotoPage = function(page){
@@ -189,16 +185,15 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
 
         // pause/resume GPS track button
         $('#gpscapture-pause-play').click(function(){
-            if($("#gpscapture-pause-play").text().trim() === 'Pause'){
+            if($("#gpscapture-pause-play").hasClass('pause')){
                 tracks.gpsTrackPause();
                 changeToResume();
             }
             else{
                 tracks.gpsTrackPlay(currentGpsAnnotation.rate, debugGPS());
-                $("#gpscapture-pause-play .ui-btn-text").text('Pause');
-                $("#gpscapture-pause-play .ui-icon").css(
-                    'background-image',
-                    'url("plugins/gps-tracking/css/images/pause.png")');
+                $("#gpscapture-pause-play").text('Pause');
+                $("#gpscapture-pause-play").removeClass('play')
+                                           .addClass('pause');
             }
 
             $('#gpscapture-pause-play').removeClass('ui-btn-active');
@@ -241,9 +236,11 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
     // show / hide gps track running icon
     $(document).on('pagecontainerbeforeshow', function(event, ui){
         if(tracks.gpsTrackStarted()){
+            $('.gps-track-start').attr('href', 'gps-capture.html');
             $('.gpstrack-running').show();
         }
         else{
+            $('.gps-track-start').attr('href', 'annotate-gps.html');
             $('.gpstrack-running').hide();
         }
     });
@@ -260,20 +257,10 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
     });
 
     // click on gps capture running icon
-    $(document).on(
-        'vmousedown',
-        '.gpstrack-running',
-        function(event){
-            // timout hack prevents the clicking on the button on the
-            // same position on the next page
-            setTimeout(function(){
-                $('body').pagecontainer('change', 'gps-capture.html');
-                event.stopPropagation();
-            }, 400);
-
-            return false;
-        }
-    );
+    $(document).on('vclick', '.gpstrack-running', function(event){
+        event.preventDefault();
+        $('body').pagecontainer('change', 'gps-capture.html');
+    });
 
     // listen for hide records event
     $(document).on(map.EVT_HIDE_RECORDS, function(){
