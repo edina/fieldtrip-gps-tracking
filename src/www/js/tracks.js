@@ -459,7 +459,6 @@ var _this = {
         //cleanup temp track
         if(this.currentTrack){
             // delete GPX file and record
-            records.deleteFile(this.currentTrack.file);
             records.deleteAnnotation(this.currentTrack.id);
         }
 
