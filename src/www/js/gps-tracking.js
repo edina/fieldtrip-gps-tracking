@@ -31,8 +31,8 @@ DAMAGE.
 
 "use strict";
 
-define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], function(// jshint ignore:line
-    ui, records,  map, file, utils, settings, tracks){
+define(['records', 'map', 'file', 'utils', 'settings', './tracks'], function(// jshint ignore:line
+    records,  map, file, utils, settings, tracks){
     var currentGpsAnnotation;
     var DEFAULT_CAPTURE_RATE = 0;
 
@@ -148,7 +148,7 @@ define(['ui', 'records', 'map', 'file', 'utils', 'settings', './tracks'], functi
      */
     var gpsCapturePage = function(){
         var config = utils.getConfig();
-        ui.mapPage('gpscapture-map');
+        map.display('gpscapture-map');
 
         var changeToResume = function(){
             $("#gpscapture-pause-play").text('Resume');
