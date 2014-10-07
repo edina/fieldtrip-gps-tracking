@@ -54,6 +54,7 @@ define(['records', 'map', 'file', 'utils', 'settings', './tracks'], function(// 
         $("#annotate-gps-colour-pick-input").spectrum({
             showPalette: true,
             showPaletteOnly: true,
+            hideAfterPaletteSelect:true,
             color: colour,
             change: function(color){
                 localStorage.setItem(tracks.COLOUR_INDEX, color.toString());
