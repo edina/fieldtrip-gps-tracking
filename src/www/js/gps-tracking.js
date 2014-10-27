@@ -272,5 +272,5 @@ define(['records', 'map', 'file', 'utils', 'settings', './tracks'], function(// 
     $(document).on(records.EVT_DELETE_ANNOTATION, deleteGPXFile);
 
     // add new asset type to fieldtrip
-    records.addAssetType('track');
+    records.addAssetType(tracks.TRACK_TYPE_NAME);
 });

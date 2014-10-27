@@ -35,6 +35,7 @@ DAMAGE.
 
 define(['map', 'records', 'utils', 'file'], function(// jshint ignore:line
     map, records, utils, file){
+
     var GPS_ACCURACY = 50;
     var GPS_AUTO_SAVE_THRESHOLD = 5;
     var GPS_ACCURACY_FLAG = false;
@@ -116,7 +117,7 @@ define(['map', 'records', 'utils', 'file'], function(// jshint ignore:line
     var gpsCaptureSave = function(callback){
         var sXML = new XMLSerializer().serializeToString(_this.currentTrack.doc);
 
-        var assetsDir = records.getAssetsDir();
+        var assetsDir = records.getAssetsDir(_this.TRACK_TYPE_NAME);
         if(assetsDir){
             var fileName = _this.currentTrack.file;
             assetsDir.getFile(
@@ -350,6 +351,7 @@ define(['map', 'records', 'utils', 'file'], function(// jshint ignore:line
 var _this = {
 
     COLOUR_INDEX: 'gps-track-color',
+    TRACK_TYPE_NAME: 'track',
 
     /**
      * Start GPX track.
@@ -362,7 +364,7 @@ var _this = {
             var fileName  = (now + '.gpx').replace(/\s|:/g, '_');
             var fullName;
 
-            var assetsDir = records.getAssetsDir();
+            var assetsDir = records.getAssetsDir(this.TRACK_TYPE_NAME);
 
             if(assetsDir){
                 fullName = file.getFilePath(assetsDir) + fileName;
