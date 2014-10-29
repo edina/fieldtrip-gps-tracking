@@ -1,6 +1,6 @@
 {
     "name": "fieldtrip-gps-tracking",
-    "version": "0.3.0",
+    "version": "0.5.0",
     "homepage": "https://github.com/edina/fieldtrip-gps-tracking",
     "description": "GPS Tracking is a Fieldtrip Open plugin for creating GPX tracks.",
     "main": "src/www/js/gps-tracking.js",
