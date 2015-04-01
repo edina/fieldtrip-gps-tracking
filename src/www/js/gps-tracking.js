@@ -77,7 +77,9 @@ define(['records', 'map', 'file', 'utils', 'settings', './tracks'], function(// 
                 utils.inform('Required field not populated');
             }
             else{
-                currentGpsAnnotation = records.createRecord(records.EDITOR_GROUP.DEFAULT, 'track.edtr');
+                currentGpsAnnotation = records.createRecord(
+                    'track.edtr',
+                    records.EDITOR_GROUP.DEFAULT);
                 currentGpsAnnotation.record.name = $('#annotate-gps-form-title').val();
                 currentGpsAnnotation.record.properties.fields = [
                             {
