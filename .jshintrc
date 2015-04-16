@@ -1,0 +1,27 @@
+{
+    "camelcase": true,
+    "browser": true,
+    "globalstrict": true,
+    "globals": {
+        "console": false,
+        "define": false,
+        "device": false,
+        "FileTransfer": false,
+        "LocalFileSystem": false,
+        "localStorage": false,
+        "location": false,
+        "module": false,
+        "navigator": false,
+        "notification": false,
+        "OpenLayers": false,
+        "plugins": false,
+        "require": false,
+        "webdb": false,
+        "FileTransferError": false
+    },
+    "multistr": true,
+    "indent": "4",
+    "jquery": true,
+    "maxparams": "4"
+}
+

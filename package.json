@@ -1,0 +1,37 @@
+{
+  "name": "fieldtrip-gps-tracking",
+  "version": "0.5.0",
+  "description": "A fieldtrip plugin for adding/updating/deleting records on pcapi",
+  "main": "src/www/js/gps-tracking.js",
+  "scripts": {
+    "lint": "node_modules/jshint/bin/jshint src/www/js/**.js",
+    "release": "npm run lint && node_modules/release-it/bin/release.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edina/fieldtrip-gps-tracking.git"
+  },
+  "keywords": [
+    "fieldtrip",
+    "pcapi",
+    "sync"
+  ],
+  "authors": [
+    "George Hamilton <george.hamilton@ed.ac.uk>",
+    "Murray King <murray.king@ed.ac.uk>",
+    "Panos Terzis <p.terzis@ed.ac.uk>"
+  ],
+  "license": "BSD",
+  "dependencies": {
+    "jquery": "^1.11.2"
+  },
+  "devDependencies": {
+    "jshint": "2.5.3",
+    "release-it": "0.0.15"
+  },
+  "bugs": {
+    "url": "https://github.com/edina/fieldtrip-gps-tracking/issues"
+  },
+  "homepage": "https://github.com/edina/fieldtrip-gps-tracking"
+}
