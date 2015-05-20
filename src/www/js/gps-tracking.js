@@ -223,10 +223,6 @@ define(['records', 'map', 'file', 'utils', 'settings', './tracks'], function(// 
         map.hideAnnotateLayer();
     };
 
-    // load spectrum js and css files for colour picker
-    $.getScript('js/ext/spectrum.js');
-    $('head').prepend('<link rel="stylesheet" href="css/ext/spectrum.css" type="text/css" />');
-
     // load gpx styles
     $('head').prepend('<link rel="stylesheet" href="plugins/gps-tracking/css/style.css" type="text/css" />');
 
