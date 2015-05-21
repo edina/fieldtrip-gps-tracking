@@ -1,6 +1,6 @@
 {
   "name": "fieldtrip-gps-tracking",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "A fieldtrip plugin for adding/updating/deleting records on pcapi",
   "main": "src/www/js/gps-tracking.js",
   "scripts": {
